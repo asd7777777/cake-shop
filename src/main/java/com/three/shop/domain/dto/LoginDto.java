@@ -6,7 +6,7 @@ import lombok.Data;
  * @author Administrator
  */
 @Data
-public class UserDto {
+public class LoginDto {
     private String username;
     private String password;
     private String email;

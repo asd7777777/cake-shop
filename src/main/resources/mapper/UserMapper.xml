@@ -121,18 +121,35 @@
     select
     <include refid="Base_Column_List" />
     from user
-    where username=#{username}
+    where username=#{username} and status=1
   </select>
   <select id="selectByPhone" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user
-    where phone=#{phone}
+    where phone=#{phone} and status=1
   </select>
   <select id="selectByEmail" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user
-    where email=#{email}
+    where email=#{email} and status=1
+  </select>
+  <select id="selectByNameAndPhoneAndEmail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    <trim prefix="where" prefixOverrides="or|and">
+      <if test="user.username != null and user.username != ''">
+        or username = #{user.username}
+      </if>
+      <if test="user.password != null and user.password != ''">
+        or password = #{user.password}
+      </if>
+      <if test="user.email != null and user.email != ''">
+        or email = #{user.email}
+      </if>
+    </trim>
+    and status = 1
   </select>
 </mapper>

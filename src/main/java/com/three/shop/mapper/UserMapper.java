@@ -46,4 +46,6 @@ public interface UserMapper {
      * @return
      */
     User selectByEmail(@Param("email") String email);
+
+    User selectByNameAndPhoneAndEmail(@Param("user") User user);
 }

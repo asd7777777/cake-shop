@@ -1,6 +1,6 @@
 package com.three.shop.service;
 
-import com.three.shop.domain.dto.UserDto;
+import com.three.shop.domain.dto.RegisterDto;
 import com.three.shop.exception.ServiceException;
 
 
@@ -9,9 +9,10 @@ import com.three.shop.exception.ServiceException;
  */
 public interface RegisterService {
     /**
-     * 注册用户功能
-     * @param userDto  用户的注册内容
+     * * 注册用户功能
+     * @param registerDto  用户的注册内容
      * @return 返回影响行数
+     * @throws ServiceException 抛出数据层异常,由全局异常捕获
      */
-    int register(UserDto userDto) throws ServiceException;
+    int register(RegisterDto registerDto) throws ServiceException;
 }
