@@ -14,5 +14,5 @@ public interface LoginService {
      * @return 返回查询到的对象
      * @throws ServiceException 抛出异常
      */
-    User selectByNameAndPhoneAndEmailService(LoginDto loginDto) throws ServiceException;
+    LoginDto selectByNameAndPhoneAndEmailService(LoginDto loginDto) throws ServiceException;
 }

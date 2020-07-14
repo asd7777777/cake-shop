@@ -4,11 +4,10 @@
 *{margin:0px;padding:0px;list-style:none;text-decoration:none;font-family:"微软雅黑", "宋体", "黑体";font-weight:normal;}
 /*页头*/
 #headCon{
-	min-width:1200px;}
+	min-width:1000px;}
 #headCon>div{
 	width:1200px;
-	margin:auto;
-	margin-top:10px;
+	margin: 10px auto auto;
 	overflow:hidden;
 	}
 #headCon>div>p{
@@ -59,9 +58,9 @@
 	margin-left:10px;}*/
 #headCon>ul{
 	width:1200px;
-	margin:auto;
 	overflow:hidden;
-	margin-top:30px;}
+	margin: 30px auto auto;
+}
 #headCon>ul>a{
 	float:left;}
 #headCon>ul>a>li{
@@ -113,7 +112,7 @@
 	min-width:1200px;
 	margin:auto;}
 #contentCon>div{
-	min-width:1200px;
+	min-width:500px;
 	height:600px;
 	margin-top:50px;
 	background:url(../img/banner06_02.jpg) center no-repeat;
@@ -194,10 +193,8 @@
 #contentCon>div>ul>div>a:hover{
 	color:#fb0000;}
 #contentCon>div>ul>ol{
-	margin:auto;
 	width:428px;
-	margin-top:24px;
-	margin-left:114px;
+	margin: 24px auto auto 114px;
 	overflow:hidden;}
 #contentCon>div>ul>ol>span{
 	float:left;
@@ -217,9 +214,7 @@
 	margin-top:10px;
 	}
 #contentCon>div>ul>.other{
-	margin:auto;
-	margin-top:30px;
-	margin-left:160px;
+	margin: 30px auto auto 160px;
 	overflow:hidden;
 	}
 #contentCon>div>ul>.other>span{
@@ -253,9 +248,9 @@
 	width:1200px;
 	height:168px;
 	background:#eee;
-	margin:auto;
 	overflow:hidden;
-	margin-top:80px;}
+	margin: 80px auto auto;
+}
 #footCon>ul>li{
 	width:330px;
 	float:left;
@@ -298,8 +293,7 @@
 	margin-top:10px;}
 #footCon>ol{
 	width:1200px;
-	margin:auto;
-	margin-top:50px;
+	margin: 50px auto auto;
 	overflow:hidden;}
 #footCon>ol>li{
 	float:left;
@@ -386,17 +380,16 @@
 	font-size:14px;
 	line-height:25px;}
 #footCon>div{
-	margin:auto;
 	width:1200px;
 	height:1px;
 	background:#b5b5b5;
-	margin-top:30px;}
+	margin: 30px auto auto;
+}
 #footCon>li{
 	width:1200px;
-	margin:auto;
 	text-align:center;
 	font-size:14px;
-	margin-top:40px;
+	margin: 40px auto auto;
 	color:#808080;}
 #footCon>li>span{
 	display:block;

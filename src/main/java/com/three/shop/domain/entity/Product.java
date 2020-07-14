@@ -27,11 +27,4 @@ public class Product {
     */
     private String brand;
 
-
-
-
-    /**
-     * 商品详情对象
-     */
-    private List<ProductDetail> productDetails;
 }

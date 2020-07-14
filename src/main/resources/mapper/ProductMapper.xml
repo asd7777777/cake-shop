@@ -10,21 +10,6 @@
     <result column="brand" jdbcType="VARCHAR" property="brand" />
   </resultMap>
 
-  <resultMap id="ProductResultMap" type="Product" extends="BaseResultMap">
-    <collection property="productDetails" resultMap="com.three.shop.mapper.ProductDetailMapper.BaseResultMap"/>
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    product_id, title, `name`, brand, img, `size`, price, stock, create_time, under_time, 
-    `status`
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from product
-    where product_id = #{productId,jdbcType=INTEGER}
-  </select>
 
   <insert id="insertSelective" keyColumn="product_id" keyProperty="productId" parameterType="com.three.shop.domain.entity.Product" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -76,10 +61,4 @@
       brand = #{brand,jdbcType=VARCHAR},
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
-    <select id="selectProductById" resultMap="ProductResultMap">
-      select p.product_id, p.title, p.name, p.brand, pd.stock, pd.product_detail_id, pd.size,
-      pd.price, pd.img
-      from product p left join product_detail pd on p.product_id = pd.product_id
-      where p.product_id = #{productId} and pd.status = 1
-    </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.three.shop.service;
 
+import com.three.shop.domain.dto.ProductDto;
 import com.three.shop.domain.entity.Product;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,7 @@ public class ShowProductServiceTest {
     ShowProductService showProductService;
     @Test
     public void showProductService() {
-        Product product = showProductService.showProductService(1);
-        System.out.println(product);
+        ProductDto productDto = showProductService.showProductService(1);
+        System.out.println(productDto);
     }
 }

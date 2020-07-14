@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.three.shop.domain.entity.User">
     <!--@mbg.generated-->
     <!--@Table `user`-->
-    <id column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="email" jdbcType="VARCHAR" property="email" />
-    <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="status" jdbcType="INTEGER" property="status" />
+    <id column="user_id" property="userId" />
+    <result column="username" property="username" />
+    <result column="password" property="password" />
+    <result column="email" property="email" />
+    <result column="phone" property="phone" />
+    <result column="create_time" property="createTime" />
+    <result column="status" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
@@ -136,8 +136,7 @@
     where email=#{email} and status=1
   </select>
   <select id="selectByNameAndPhoneAndEmail" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
+    select user_id, username, password, email, phone, create_time, status
     from user
     <trim prefix="where" prefixOverrides="or|and">
       <if test="user.username != null and user.username != ''">
@@ -150,6 +149,6 @@
         or email = #{user.email}
       </if>
     </trim>
-    and status = 1
+<!--        and status = 1-->
   </select>
 </mapper>

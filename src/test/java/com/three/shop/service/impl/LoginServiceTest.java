@@ -21,6 +21,6 @@ public class LoginServiceTest {
         LoginDto loginDto = new LoginDto();
         loginDto.setUsername("张三");
         loginDto.setPassword("123456789");
-        User user = loginService.selectByNameAndPhoneAndEmailService(loginDto);
+        LoginDto loginDto1 = loginService.selectByNameAndPhoneAndEmailService(loginDto);
     }
 }

@@ -47,5 +47,10 @@ public interface UserMapper {
      */
     User selectByEmail(@Param("email") String email);
 
+    /**
+     * 根据用户名或者邮箱或者手机号码查询用户
+     * @param user
+     * @return
+     */
     User selectByNameAndPhoneAndEmail(@Param("user") User user);
 }

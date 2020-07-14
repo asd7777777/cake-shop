@@ -1,5 +1,6 @@
 package com.three.shop.controller;
 
+import com.three.shop.domain.dto.ProductDto;
 import com.three.shop.domain.entity.Product;
 import com.three.shop.service.ShowProductService;
 import com.three.shop.utils.ResponseEntity;
@@ -16,8 +17,8 @@ public class ProductController {
     @Resource
     ShowProductService showProductService;
     @GetMapping("/product")
-    public ResponseEntity<Product> showProduct(int productId) {
-        Product product = showProductService.showProductService(productId);
-        return ResponseEntity.success(product);
+    public ResponseEntity<ProductDto> showProduct(int productId) {
+        ProductDto productDto = showProductService.showProductService(productId);
+        return ResponseEntity.success(productDto);
     }
 }

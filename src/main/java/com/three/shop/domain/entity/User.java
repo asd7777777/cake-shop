@@ -3,6 +3,9 @@ package com.three.shop.domain.entity;
 import java.util.Date;
 import lombok.Data;
 
+/**
+ * @author Administrator
+ */
 @Data
 public class User {
     /**

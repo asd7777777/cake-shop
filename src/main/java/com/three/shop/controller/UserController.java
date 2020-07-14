@@ -7,6 +7,7 @@ import com.three.shop.exception.ServiceException;
 import com.three.shop.service.RegisterService;
 import com.three.shop.service.LoginService;
 import com.three.shop.utils.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,9 +27,9 @@ public class UserController {
         int count = registerService.register(registerDto);
         return ResponseEntity.success(count);
     }
-    @PostMapping("/login")
-    public ResponseEntity<User> loginController(LoginDto loginDto) throws ServiceException {
-        User user = loginService.selectByNameAndPhoneAndEmailService(loginDto);
-        return ResponseEntity.success(user);
+    @GetMapping("/login")
+    public ResponseEntity<LoginDto> loginController(LoginDto loginDto) throws ServiceException {
+        LoginDto loginDto1 = loginService.selectByNameAndPhoneAndEmailService(loginDto);
+        return ResponseEntity.success(loginDto1);
     }
 }

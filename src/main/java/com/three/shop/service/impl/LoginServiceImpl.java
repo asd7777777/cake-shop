@@ -19,13 +19,15 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     UserMapper userMapper;
     @Override
-    public User selectByNameAndPhoneAndEmailService(LoginDto loginDto) throws ServiceException {
+    public LoginDto selectByNameAndPhoneAndEmailService(LoginDto loginDto) throws ServiceException {
         User user = new User();
         BeanUtils.copyProperties(loginDto, user);
         User user1 = userMapper.selectByNameAndPhoneAndEmail(user);
+        LoginDto loginDto1 = new LoginDto();
+        BeanUtils.copyProperties(user1, loginDto1 );
         if (!user1.getPassword().equals(loginDto.getPassword())) {
             throw new ServiceException(Status.SERVICE_ERROR3);
         }
-        return user1;
+        return loginDto1;
     }
 }

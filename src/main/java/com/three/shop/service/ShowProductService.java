@@ -1,5 +1,6 @@
 package com.three.shop.service;
 
+import com.three.shop.domain.dto.ProductDto;
 import com.three.shop.domain.entity.Product;
 
 /**
@@ -11,5 +12,5 @@ public interface ShowProductService {
      * @param productId 商品id
      * @return 返回查询到的商品对象
      */
-    Product showProductService(int productId);
+    ProductDto showProductService(int productId);
 }
