@@ -5,7 +5,7 @@ import com.three.shop.domain.dto.RegisterDto;
 import com.three.shop.domain.entity.User;
 import com.three.shop.exception.ServiceException;
 import com.three.shop.service.RegisterService;
-import com.three.shop.service.impl.LoginService;
+import com.three.shop.service.LoginService;
 import com.three.shop.utils.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

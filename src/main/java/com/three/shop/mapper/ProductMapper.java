@@ -1,6 +1,7 @@
 package com.three.shop.mapper;
 
 import com.three.shop.domain.entity.Product;
+import org.apache.ibatis.annotations.Param;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer productId);
@@ -14,4 +15,11 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    /**
+     * 根据商品id查询商品
+     * @param productId 商品id
+     * @return 返回查询到的商品对象
+     */
+    Product selectProductById(@Param("productId") int productId);
 }
