@@ -28,9 +28,9 @@
   </delete>
   <insert id="insert" keyColumn="admin_id" keyProperty="adminId" parameterType="com.three.shop.domain.entity.Admin" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into `admin` (admin_name, email, `status`, 
+    insert into `admin` (admin_name, email, `status`,
       create_time)
-    values (#{adminName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+    values (#{adminName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="admin_id" keyProperty="adminId" parameterType="com.three.shop.domain.entity.Admin" useGeneratedKeys="true">

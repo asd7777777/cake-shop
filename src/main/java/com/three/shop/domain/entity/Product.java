@@ -1,62 +1,33 @@
 package com.three.shop.domain.entity;
 
-import java.util.Date;
 import lombok.Data;
 
+/**
+ * Description：
+ *
+ * @author sheng
+ * @date 2020/7/14 21:04
+ * @since JDK 1.8
+ */
 @Data
 public class Product {
     /**
-    * 商品id
-    */
+     * 商品id
+     */
     private Integer productId;
 
     /**
-    * 商品标题
-    */
+     * 商品标题
+     */
     private String title;
 
     /**
-    * 商品描述
-    */
+     * 商品描述
+     */
     private String name;
 
     /**
-    * 商品品牌
-    */
+     * 商品品牌
+     */
     private String brand;
-
-    /**
-    * 商品图片
-    */
-    private String img;
-
-    /**
-    * 商品尺寸
-    */
-    private String size;
-
-    /**
-    * 商品价格
-    */
-    private Long price;
-
-    /**
-    * 商品库存
-    */
-    private Integer stock;
-
-    /**
-    * 上架时间
-    */
-    private Date createTime;
-
-    /**
-    * 下架时间
-    */
-    private Date underTime;
-
-    /**
-    * 1代表正常,0代表下架
-    */
-    private Integer status;
 }
