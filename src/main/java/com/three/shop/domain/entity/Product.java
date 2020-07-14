@@ -1,5 +1,6 @@
 package com.three.shop.domain.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
@@ -38,7 +39,7 @@ public class Product {
     /**
     * 商品价格
     */
-    private Long price;
+    private BigDecimal price;
 
     /**
     * 商品库存

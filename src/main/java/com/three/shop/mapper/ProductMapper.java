@@ -1,6 +1,7 @@
 package com.three.shop.mapper;
 
 import com.three.shop.domain.entity.Product;
+import org.apache.ibatis.annotations.Param;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer productId);
@@ -14,4 +15,6 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    int updateStockById(@Param("productId") int productId, @Param("stock") int stock);
 }

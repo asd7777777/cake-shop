@@ -117,4 +117,21 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select order_id, order_no, user_id, total, address, status, create_time
+    from tb_order
+    where status != 0 and user_id=#{userId}
+    limit #{limit},#{size}
+  </select>
+  <select id="selectOrdersByStatus" resultMap="BaseResultMap">
+    select order_id, order_no, user_id, total, address, status, create_time
+    from tb_order
+    where status=#{status} and user_id=#{userId}
+    limit #{limit},#{size}
+  </select>
+  <select id="selectByOrderNo" resultMap="BaseResultMap">
+    select order_id, order_no, user_id, total, address, status, create_time
+    from tb_order
+    where order_no=#{orderNo} and status!=0
+  </select>
 </mapper>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.shop.mapper.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.three.shop.domain.entity.OrderDetail">
+    <!--@mbg.generated-->
+    <!--@Table order_detail-->
+    <id column="order_detail_id" jdbcType="INTEGER" property="orderDetailId" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="product_pic" jdbcType="VARCHAR" property="productPic" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    order_detail_id, order_no, product_id, `count`, price, product_pic, product_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from order_detail
+    where order_detail_id = #{orderDetailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from order_detail
+    where order_detail_id = #{orderDetailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="order_detail_id" keyProperty="orderDetailId" parameterType="com.three.shop.domain.entity.OrderDetail" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into order_detail (order_no, product_id, `count`, 
+      price, product_pic, product_name
+      )
+    values (#{orderNo,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, #{count,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{productPic,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="order_detail_id" keyProperty="orderDetailId" parameterType="com.three.shop.domain.entity.OrderDetail" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="count != null">
+        `count`,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="productPic != null">
+        product_pic,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="productPic != null">
+        #{productPic,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.shop.domain.entity.OrderDetail">
+    <!--@mbg.generated-->
+    update order_detail
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        `count` = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="productPic != null">
+        product_pic = #{productPic,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_detail_id = #{orderDetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.shop.domain.entity.OrderDetail">
+    <!--@mbg.generated-->
+    update order_detail
+    set order_no = #{orderNo,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=INTEGER},
+      `count` = #{count,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      product_pic = #{productPic,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR}
+    where order_detail_id = #{orderDetailId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByOrderNo" resultMap="BaseResultMap">
+    select order_detail_id, order_no, product_id, count, price, product_pic, product_name
+    from order_detail
+    where order_no=#{orderNo}
+  </select>
+  <insert id="insertOrderDetail">
+    insert into order_detail(order_no, product_id, count, price, product_pic, product_name)
+    values(#{orderDetail.orderNo},#{orderDetail.productId},#{orderDetail.count},#{orderDetail.price},#{orderDetail.productPic},#{orderDetail.productName})
+  </insert>
+</mapper>
