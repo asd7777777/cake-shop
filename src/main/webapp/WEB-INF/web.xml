@@ -31,9 +31,4 @@
         <servlet-name>dispatcherServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
-    <!-- 访问初始页 -->
-    <welcome-file-list>
-        <welcome-file>cake/index.html</welcome-file>
-    </welcome-file-list>
 </web-app>

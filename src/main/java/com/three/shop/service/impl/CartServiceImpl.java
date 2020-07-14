@@ -3,8 +3,10 @@ package com.three.shop.service.impl;
 import com.three.shop.domain.dto.CartDto;
 import com.three.shop.domain.dto.ResultDto;
 import com.three.shop.domain.entity.Cart;
+import com.three.shop.domain.entity.ProductDetail;
 import com.three.shop.exception.ServiceException;
 import com.three.shop.mapper.CartMapper;
+import com.three.shop.mapper.ProductDetailMapper;
 import com.three.shop.service.CartService;
 import com.three.shop.utils.JudgeEmptyUtils;
 import com.three.shop.utils.Status;
@@ -27,6 +29,8 @@ import java.util.Objects;
 public class CartServiceImpl implements CartService {
     @Resource
     private CartMapper cartMapper;
+    @Resource
+    private ProductDetailMapper productDetailMapper;
 
     @Override
     public ResultDto<List<Cart>> findCartByUserId(String userId) {
@@ -101,8 +105,19 @@ public class CartServiceImpl implements CartService {
         // 查询当前用户是否已经添加过该商品进购物车
         List<Cart> carts = cartMapper.selectByUserIdAndProductId(cartDto.getUserId(), cartDto.getProductId());
         // 查询当前商品的库存
-
-
+        ProductDetail productDetail = null;
+        try {
+            // 因为 size 不能设置为 unique，如果添加商品时同一个商品的 size 不添加判断，那么有可能重复，则有可能查询多个
+            productDetail = productDetailMapper.selectByProductIdAndSize(cart.getProductId(), cart.getProductSize());
+        } catch (Exception e) {
+            return ResultDto.error(StatusEnum.DAO_ERROR);
+        }
+        // 存储库存
+        int stock = 0;
+        // 非空判断
+        if (productDetail != null) {
+            stock = productDetail.getStock();
+        }
         // 存储相同的购物车数据
         Cart oldCart = null;
         // 非空判断
@@ -122,6 +137,11 @@ public class CartServiceImpl implements CartService {
             // 判断是否是移除的购物车
             if (Objects.equals(0, oldCart.getStatus())) {
                 // 移除的购物车，设置状态为 1，并将数量设置为新添加的数量
+                // 判断库存
+                if (stock < cart.getProductQuantity()) {
+                    // 库存不足
+                    return ResultDto.error(StatusEnum.STOCK_ERROR);
+                }
                 // 设置 cartId、status
                 cart.setCartId(oldCart.getCartId());
                 cart.setStatus(1);
@@ -129,19 +149,25 @@ public class CartServiceImpl implements CartService {
                 rows = cartMapper.updateCart(cart);
             } else {
                 // 不是移除的购物车，添加数量，要先判断库存是否足够
-                // 设置 cartId
-                cart.setCartId(oldCart.getCartId());
-                cart.setStatus(1);
                 // 总数量
                 int quantity = oldCart.getProductQuantity() + cart.getProductQuantity();
                 // 判断库存
-
-                // 设置数量
+                if (stock < quantity) {
+                    // 库存不足
+                    return ResultDto.error(StatusEnum.STOCK_ERROR);
+                }
+                // 设置数据
+                cart.setCartId(oldCart.getCartId());
+                cart.setStatus(1);
                 cart.setProductQuantity(quantity);
                 // 修改
                 rows = cartMapper.updateCart(cart);
             }
         } else {
+            // 判断库存
+            if (stock < cart.getProductQuantity()) {
+                return ResultDto.error(StatusEnum.STOCK_ERROR);
+            }
             // 不存在则进行保存
             rows = cartMapper.insertCart(cart);
         }
@@ -178,7 +204,7 @@ public class CartServiceImpl implements CartService {
         int rows = cartMapper.updateCart(cart);
         // 判断
         if (rows > 0) {
-            return ResultDto.success(rows, StatusEnum.PARAM_ERROR);
+            return ResultDto.success(rows, StatusEnum.SUCCESS);
         } else {
             return ResultDto.error(StatusEnum.ERROR);
         }

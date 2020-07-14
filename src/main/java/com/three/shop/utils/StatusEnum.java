@@ -25,6 +25,10 @@ public enum StatusEnum {
      */
     SERVICE_ERROR(40002, "service_error", "业务异常"),
     /**
+     * 库存不足
+     */
+    STOCK_ERROR(60000, "stock_error", "库存不足"),
+    /**
      * 未知错误
      */
     ERROR(50000, "error", "业务繁忙，请稍后尝试");

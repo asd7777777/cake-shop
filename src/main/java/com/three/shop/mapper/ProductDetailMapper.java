@@ -3,8 +3,6 @@ package com.three.shop.mapper;
 import com.three.shop.domain.entity.ProductDetail;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 /**
  * Description：
  *
@@ -32,5 +30,5 @@ public interface ProductDetailMapper {
      * @param size      尺寸
      * @return 商品信息集合
      */
-    List<ProductDetail> selectByProductIdAndSize(@Param("productId") int productId, @Param("size") String size);
+    ProductDetail selectByProductIdAndSize(@Param("productId") int productId, @Param("size") String size);
 }
