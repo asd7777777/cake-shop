@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.shop.mapper.ProductDetailMapper">
+    <resultMap id="BaseResultMap" type="com.three.shop.domain.entity.ProductDetail">
+        <!--@mbg.generated-->
+        <!--@Table product_detail-->
+        <id column="product_detail_id" jdbcType="INTEGER" property="productDetailId"/>
+        <result column="size" jdbcType="VARCHAR" property="size"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="unload_time" jdbcType="TIMESTAMP" property="unloadTime"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="img" jdbcType="VARCHAR" property="img"/>
+        <result column="product_id" jdbcType="INTEGER" property="productId"/>
+        <result column="stock" jdbcType="INTEGER" property="stock"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        product_detail_id, `size`, price, create_time, unload_time, `status`, img, product_id,
+        stock
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from product_detail
+        where product_detail_id = #{productDetailId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from product_detail
+        where product_detail_id = #{productDetailId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="product_detail_id" keyProperty="productDetailId"
+            parameterType="com.three.shop.domain.entity.ProductDetail" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into product_detail (`size`, price, create_time,
+        unload_time, `status`, img,
+        product_id, stock)
+        values (#{size,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP},
+        #{unloadTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{img,jdbcType=VARCHAR},
+        #{productId,jdbcType=INTEGER}, #{stock,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" keyColumn="product_detail_id" keyProperty="productDetailId"
+            parameterType="com.three.shop.domain.entity.ProductDetail" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into product_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="size != null">
+                `size`,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="unloadTime != null">
+                unload_time,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+            <if test="productId != null">
+                product_id,
+            </if>
+            <if test="stock != null">
+                stock,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="size != null">
+                #{size,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="unloadTime != null">
+                #{unloadTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                #{stock,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.three.shop.domain.entity.ProductDetail">
+        <!--@mbg.generated-->
+        update product_detail
+        <set>
+            <if test="size != null">
+                `size` = #{size,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="unloadTime != null">
+                unload_time = #{unloadTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                img = #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="productId != null">
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+            <if test="stock != null">
+                stock = #{stock,jdbcType=INTEGER},
+            </if>
+        </set>
+        where product_detail_id = #{productDetailId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.three.shop.domain.entity.ProductDetail">
+        <!--@mbg.generated-->
+        update product_detail
+        set `size` = #{size,jdbcType=VARCHAR},
+        price = #{price,jdbcType=DECIMAL},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        unload_time = #{unloadTime,jdbcType=TIMESTAMP},
+        `status` = #{status,jdbcType=INTEGER},
+        img = #{img,jdbcType=VARCHAR},
+        product_id = #{productId,jdbcType=INTEGER},
+        stock = #{stock,jdbcType=INTEGER}
+        where product_detail_id = #{productDetailId,jdbcType=INTEGER}
+    </update>
+
+    <select id="selectByProductIdAndSize" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_detail
+        where product_id=#{productId} and size=#{size}
+    </select>
+</mapper>
