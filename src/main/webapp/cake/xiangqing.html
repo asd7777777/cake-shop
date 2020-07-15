@@ -10,8 +10,9 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <script>
         $(function () {
+             let productId = getQueryString("productId");
             let data = {
-                productId:1
+                productId:productId
             };
             $.ajax({
                 url:'http://localhost:8080/product',
@@ -63,42 +64,117 @@
                                         $("<img>").attr("src","../cake/img/" + productDetail[4].img).css({"width":"150px","height":"120px"})
                                     )
                             )
-
+                            /*for(let i = 0; i<productDetail.size; i++) {
+                                let $li = $(".check01")
+                                    .append(
+                                        $("<li>")
+                                            .append(
+                                                $("<input>").attr("type","radio").attr("name", "size").val(productDetail[i].size)
+                                            )
+                                            .append(
+                                                $("<span>").text(productDetail[i].size)
+                                            )
+                                    )
+                            }*/
                         // 获取span标签
                         let $span = $(".price");
                         $span.prepend(
                             $("<h2>").text("¥" + productDetail[0].price + "~" + productDetail[4].price)
                         )
-                        // 获取input标签
+                        // 获取li标签
                         let $li1 = $(".size1");
+                        let $input1= $(".input1");
+                        $input1.val(productDetail[0].size);
                         $li1.append(
                             $("<span>").text(productDetail[0].size)
                         )
-                        // 获取input标签
+                            .append(
+                                $("<span>").text(productDetail[0].price).addClass("price1")
+                            )
+                        // 获取li标签
+                        let $input2 = $(".input2");
+                        $input2.val(productDetail[1].size);
                         let $li2 = $(".size2");
                         $li2.append(
                             $("<span>").text(productDetail[1].size)
                         )
-                        // 获取input标签
+                            .append(
+                                $("<span>").text(productDetail[1].price).addClass("price2")
+                            )
+                        // 获取li标签
                         let $li3 = $(".size3");
+                        let $input3 = $(".input3");
+                        $input3.val(productDetail[2].size);
                         $li3.append(
-                            $("<span>").text(productDetail[2].size).append($("<br>"))
+                            $("<span>").text(productDetail[2].size)
                         )
-                        // 获取input标签
+                            .append(
+                                $("<span>").text(productDetail[2].price).addClass("price3")
+                            ).append($("<br>"))
+                        // 获取li标签
+                        let $input4 = $(".input4");
+                        $input4.val(productDetail[3].size);
                         let $li4 = $(".size4");
                         $li4.append(
                             $("<span>").text(productDetail[3].size)
                         )
-                        // 获取input标签
+                            .append(
+                                $("<span>").text(productDetail[3].price).addClass("").addClass("price4")
+                            )
+                        // 获取li标签
+                        let $input5 = $(".input5");
+                        $input5.val(productDetail[4].size);
                         let $li5 = $(".size5");
                         $li5.append(
                             $("<span>").text(productDetail[4].size)
                         )
+                            .append(
+                                $("<span>").text(productDetail[4].price).addClass("price5")
+                            )
                     }
                 }
             })
+            // 给加入购物车添加点击事件
             $(".car").click(function () {
+                //取出选中的size值
+                let productSize = $('input:radio[name="size"]:checked').val();
                 let num = $(".num").val();
+
+                let data = JSON.stringify({
+                    'productId':productId,
+                    'productSize':productSize,
+                    'productQuantity':num})
+                $.ajax({
+                    type:'GET',
+                    data:data,
+                    url:'http://localhost:8080/cakeshop/cart/savaCart',
+                    success:function (result) {
+                        if (result.status == 20000 && result.msg == "成功") {
+                            alert("加入购物车成功");
+                        }
+                    }
+                })
+            })
+            // 给立即购买添加点击事件
+            $(".buy").click(function () {
+                //取出选中的size值
+                let productSize = $('input:radio[name="size"]:checked').val();
+                let num = $(".num").val();
+
+                let data = JSON.stringify({
+                    'productId':productId,
+                    'productSize':productSize,
+                    'productQuantity':num})
+                $.ajax({
+                    type:'GET',
+                    data:data,
+                    url:'http://localhost:8080/cakeshop/cart/savaCart',
+                    success:function (result) {
+                        if (result.status == 20000 && result.msg == "成功") {
+                            alert("加入购物车成功");
+                        }
+                    }
+                })
             })
         })
         // /减数量
@@ -221,28 +297,33 @@
                     <li class="check01">
                         <p>规格</p>
                         <li class="size1">
-                        <input type="radio" name="size" >
+                        <input type="radio" name="size" class="input1">
                         </li>
 <!--                        <span>18寸蛋糕</span>-->
                         <li class="size2">
-                        <input type="radio" name="size" >
+                        <input type="radio" name="size" class="input2">
                         </li>
 <!--                        <span>18寸蛋糕</span>-->
                         <li class="size3">
-                        <input type="radio" name="size" >
+                        <input type="radio" name="size" class="input3">
                         </li>
 <!--                        <span>18寸蛋糕</span><br/>-->
                         <li class="size4">
-                        <input type="radio" name="size" >
+                        <input type="radio" name="size" class="input4">
                         </li>
 <!--                        <span>18寸蛋糕</span>-->
                         <li class="size5">
-                        <input type="radio" name="size" >
+                        <input type="radio" name="size" class="input5">
                         </li>
 <!--                        <span>18寸蛋糕</span>-->
                     </li>
 
                 </from>
+                <script>
+                    $(".size1").click(function () {
+
+                    })
+                </script>
                 <!--<ol>
                     <p>数量</p>
                     <a href="">-</a><input value="1"><a href="">+</a>
@@ -257,8 +338,8 @@
                     <input style="width: 50px; height: 38px; border: 2px white;" type="button" value="+" onclick="add(this)" />
 
                 </div>
-                <a href="pay.html" class="buy">立刻购买</a>
-                <a href="shoppingCar.html" class="car">加入购物车</a>
+                <a href="#" class="buy">立刻购买</a>
+                <a href="#" class="car">加入购物车</a>
                 <a href="#" class="love"></a>
             </ul>
         </div>
