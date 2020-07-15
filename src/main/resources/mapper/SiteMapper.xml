@@ -15,142 +15,60 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="hint" jdbcType="VARCHAR" property="hint" />
   </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    site_id, username, keyword, Site_dep, icp, company_name, eamil, phone, `status`, 
-    hint
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from site
-    where site_id = #{siteId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    <!--@mbg.generated-->
-    delete from site
-    where site_id = #{siteId,jdbcType=INTEGER}
-  </delete>
+
+
   <insert id="insert" keyColumn="site_id" keyProperty="siteId" parameterType="com.three.shop.domain.entity.Site" useGeneratedKeys="true">
     <!--@mbg.generated-->
-    insert into site (username, keyword, Site_dep, 
-      icp, company_name, eamil, 
+
+      insert into site (username, keyword, Site_dep,
+      icp, company_name, eamil,
       phone, `status`, hint
       )
-    values (#{username,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{siteDep,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{keyword,jdbcType=VARCHAR}, #{siteDep,jdbcType=VARCHAR},
       #{icp,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{eamil,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{hint,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" keyColumn="site_id" keyProperty="siteId" parameterType="com.three.shop.domain.entity.Site" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into site
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        username,
-      </if>
-      <if test="keyword != null">
-        keyword,
-      </if>
-      <if test="siteDep != null">
-        Site_dep,
-      </if>
-      <if test="icp != null">
-        icp,
-      </if>
-      <if test="companyName != null">
-        company_name,
-      </if>
-      <if test="eamil != null">
-        eamil,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-      <if test="hint != null">
-        hint,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="keyword != null">
-        #{keyword,jdbcType=VARCHAR},
-      </if>
-      <if test="siteDep != null">
-        #{siteDep,jdbcType=VARCHAR},
-      </if>
-      <if test="icp != null">
-        #{icp,jdbcType=VARCHAR},
-      </if>
-      <if test="companyName != null">
-        #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="eamil != null">
-        #{eamil,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="hint != null">
-        #{hint,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.three.shop.domain.entity.Site">
-    <!--@mbg.generated-->
-    update site
-    <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
-      </if>
-      <if test="keyword != null">
-        keyword = #{keyword,jdbcType=VARCHAR},
-      </if>
-      <if test="siteDep != null">
-        Site_dep = #{siteDep,jdbcType=VARCHAR},
-      </if>
-      <if test="icp != null">
-        icp = #{icp,jdbcType=VARCHAR},
-      </if>
-      <if test="companyName != null">
-        company_name = #{companyName,jdbcType=VARCHAR},
-      </if>
-      <if test="eamil != null">
-        eamil = #{eamil,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="hint != null">
-        hint = #{hint,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where site_id = #{siteId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.three.shop.domain.entity.Site">
-    <!--@mbg.generated-->
-    update site
-    set username = #{username,jdbcType=VARCHAR},
-      keyword = #{keyword,jdbcType=VARCHAR},
-      Site_dep = #{siteDep,jdbcType=VARCHAR},
-      icp = #{icp,jdbcType=VARCHAR},
-      company_name = #{companyName,jdbcType=VARCHAR},
-      eamil = #{eamil,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=INTEGER},
-      hint = #{hint,jdbcType=VARCHAR}
-    where site_id = #{siteId,jdbcType=INTEGER}
-  </update>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select *
+        from site
+    </select>
+
+    <update id="update" >
+        update third_db
+        <trim prefix="set" suffixOverrides=",">
+            <if test="site.username!= null   ">
+                username =#{site.username},
+            </if>
+            <if test="site.keyword != null">
+                keyword = #{site.keyword},
+            </if>
+            <if test="site.siteDep != null">
+                Site_dep = #{site.siteDep},
+            </if>
+            <if test="site.icp != null">
+                icp = #{site.icp},
+            </if>
+            <if test="site.companyName != null">
+                company_name = #{site.companyName},
+            </if>
+            <if test="site.eamil != null">
+                eamil = #{site.eamil},
+            </if>
+            <if test="site.phone != null">
+                phone = #{site.phone},
+            </if>
+            <if test="site.status != null">
+                status = #{site.status},
+            </if>
+            <if test="site.hint != null">
+                hint = #{site.hint},
+            </if>
+
+        </trim>
+        where site_id = #{site.siteId}
+
+
+    </update>
 </mapper>

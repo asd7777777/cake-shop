@@ -1,17 +1,17 @@
 package com.three.shop.mapper;
 
 import com.three.shop.domain.entity.Site;
+import com.three.shop.domain.entity.User;
+import org.apache.ibatis.annotations.Param;
+
+import javax.resource.cci.Record;
+import java.awt.*;
 
 public interface SiteMapper {
-    int deleteByPrimaryKey(Integer siteId);
-
-    int insert(Site record);
-
-    int insertSelective(Site record);
-
-    Site selectByPrimaryKey(Integer siteId);
-
-    int updateByPrimaryKeySelective(Site record);
-
-    int updateByPrimaryKey(Site record);
+    //查询
+    Site selectById( int id);
+    //添加
+    int insert( Site site);
+    //更新
+    int update(@Param("site") Site site);
 }
