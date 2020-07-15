@@ -14,5 +14,7 @@ public interface OrderService {
 
     OrderDetailVo findDetailByOrderNo(String orderNo, int page, int size);
 
-    int generateOrder(OrderDto orderDto);
+    int generateOrder(OrderDto orderDto) throws ServiceException;
+
+    int removeOrderByOrderNo(String orderNo);
 }

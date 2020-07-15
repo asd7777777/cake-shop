@@ -134,4 +134,11 @@
     from tb_order
     where order_no=#{orderNo} and status!=0
   </select>
+  <insert id="insertOrder">
+    insert into tb_order(order_no, user_id, total, address)
+      values (#{order.orderNo},#{order.userId},#{order.total},#{order.address})
+  </insert>
+    <update id="deleteOrderByOrderNo">
+      update tb_order set status=0 where order_no=#{orderNo}
+    </update>
 </mapper>

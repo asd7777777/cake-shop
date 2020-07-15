@@ -23,4 +23,8 @@ public interface OrderMapper {
     List<Order> selectOrdersByStatus(@Param("status") int status, @Param("userId") int userId, @Param("limit") int limit, @Param("size") int size);
 
     Order selectByOrderNo(@Param("orderNo") String orderNo);
+
+    int insertOrder(@Param("order") Order order);
+
+    int deleteOrderByOrderNo(@Param("orderNo") String orderNo);
 }

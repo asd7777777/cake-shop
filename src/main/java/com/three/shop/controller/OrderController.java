@@ -18,14 +18,14 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("/allList")
-    public ResponseEntity<List<OrderVo>> allList(int userId, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int size) {
-        List<OrderVo> orderVos = orderService.orderList(userId, page, size);
+    public ResponseEntity<List<OrderVo>> allList( @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "4") int size) {
+        List<OrderVo> orderVos = orderService.orderList(1, page, size);
         return ResponseEntity.success(orderVos);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<OrderVo>> list(int status, int userId, @RequestParam(defaultValue = "1") int page,@RequestParam(defaultValue = "10") int size){
-        List<OrderVo> orderVos = orderService.findListByStatus(status, userId, page, size);
+    public ResponseEntity<List<OrderVo>> list(int status, @RequestParam(defaultValue = "1") int page,@RequestParam(defaultValue = "4") int size){
+        List<OrderVo> orderVos = orderService.findListByStatus(status, 1, page, size);
         return ResponseEntity.success(orderVos);
     }
 
@@ -36,8 +36,14 @@ public class OrderController {
     }
 
     @PostMapping("/addOrder")
-    public ResponseEntity<Integer> addOrder(@RequestBody OrderDto orderDto){
+    public ResponseEntity<Integer> addOrder(@RequestBody OrderDto orderDto) throws ServiceException {
         int count = orderService.generateOrder(orderDto);
+        return ResponseEntity.success(count);
+    }
+
+    @PostMapping("/deleteOrder")
+    public ResponseEntity<Integer> deleteOrder(@RequestParam("orderNo") String orderNo) {
+        int count = orderService.removeOrderByOrderNo(orderNo);
         return ResponseEntity.success(count);
     }
 }

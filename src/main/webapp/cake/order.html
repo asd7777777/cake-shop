@@ -7,6 +7,7 @@
 <title>我的甜品，你的爱~</title>
 <link rel="shortcut icon" href="images/logo_01.png">
 <link rel="stylesheet" href="css/order.css">
+    <script src="js/jquery-1.10.2.js"></script>
 </head>
 
 <body>
@@ -42,11 +43,11 @@
 <div id="contentCon">
 	<div class="left">
     	<div></div>
-        <p>晨曦夏夜</p>
-        <a href="#">切换账号</a>
+        <p></p>
+        <a href="login.html">切换账号</a>
         <span></span>
         <ul>
-        	<li><a href="userinfo.html">个人信息</a></li>
+        	<li><a href="#">个人信息</a></li>
             <li><a href="#" class="my">我的订单</a></li>
             <li><a href="#">我的钱包</a></li>
             <li><a href="#">优惠特权</a></li>
@@ -58,111 +59,111 @@
     </div>
     <div class="right">
     	<ul>
-        	<li class="all">全部订单</li>
-            <li>待付款</li>
-            <li>已发货</li>
-            <li>待评价</li>
+        	<li class="all"><a href="javascript:" onclick="showAllOrder()">全部订单</a></li>
+            <li><a href="javascript:" onclick="showOrderByStatus(1)">待付款</a></li>
+            <li><a href="javascript:" onclick="showOrderByStatus(2)">已发货</a></li>
+            <li><a href="javascript:" onclick="showOrderByStatus(3)">待评价</a></li>
             <li>售后服务</li>
         </ul>
-        <ol>
-        	<input type="checkbox">
-            <p>2017-9-22&nbsp;&nbsp;&nbsp;&nbsp;订单号：124534645747</p>
-            <a href="#"></a>
-        </ol>
-        <div>
-        	<li></li>
-            <ul>
-            	<li>
-                	<p>创意甜橙味蛋糕</p>
-                    <span>净含量：250克</span>
-                </li>
-                <li class="price">¥29.00</li>
-                <li class="price">x1</li>
-                <li>
-                	<a href="#">联系我们</a>
-                    <a href="#" class="text02">申请售后</a>
-                </li>
-                <li>
-                	<a href="#">订单详情</a>
-                    <a href="#" class="text02">查看物流</a>
-                </li>
-            </ul>
-        </div>
-         <ol>
-        	<input type="checkbox">
-            <p>2017-9-12&nbsp;&nbsp;&nbsp;&nbsp;订单号：124537468977</p>
-            <a href="#"></a>
-        </ol>
-        <div>
-        	<li class="pic02"></li>
-            <ul>
-            	<li>
-                	<p>创意心形蛋糕</p>
-                    <span>净含量：250克</span>
-                </li>
-                <li class="price">¥59.00</li>
-                <li class="price">x1</li>
-                <li>
-                	<a href="#">联系我们</a>
-                    <a href="#" class="text02">申请售后</a>
-                </li>
-                <li>
-                	<a href="#">订单详情</a>
-                    <a href="#" class="text02">查看物流</a>
-                </li>
-                <a href="#">评价</a>
-            </ul>
-        </div>
-        <ol>
-        	<input type="checkbox">
-            <p>2017-8-25&nbsp;&nbsp;&nbsp;&nbsp;订单号：680945239418</p>
-            <a href="#"></a>
-        </ol>
-        <div>
-        	<li class="pic03"></li>
-            <ul>
-            	<li>
-                	<p>表白首选-蝴蝶粉蛋</p>
-                    <span>净含量：50克</span>
-                </li>
-                <li class="price">¥139.00</li>
-                <li class="price">x1</li>
-                <li>
-                	<a href="#">联系我们</a>
-                    <a href="#" class="text02">申请售后</a>
-                </li>
-                <li>
-                	<a href="#">订单详情</a>
-                    <a href="#" class="text02">查看物流</a>
-                </li>
-                <a href="#">评价</a>
-            </ul>
-        </div>
-        <ol>
-        	<input type="checkbox">
-            <p>2017-8-5&nbsp;&nbsp;&nbsp;&nbsp;订单号：456745239418</p>
-            <a href="#"></a>
-        </ol>
-        <div>
-        	<li class="pic04"></li>
-            <ul>
-            	<li>
-                	<p>自然系列蛋糕</p>
-                    <span>净含量：250克</span>
-                </li>
-                <li class="price">¥89.00</li>
-                <li class="price">x1</li>
-                <li>
-                	<a href="#">联系我们</a>
-                    <a href="#" class="text02">申请售后</a>
-                </li>
-                <li>
-                	<a href="#">订单详情</a>
-                    <a href="#" class="text02">查看物流</a>
-                </li>
-                <a href="#">评价</a>
-            </ul>
-        </div>
+<!--        <ol>-->
+<!--        	<input type="checkbox">-->
+<!--            <p>2017-9-22&nbsp;&nbsp;&nbsp;&nbsp;订单号：124534645747</p>-->
+<!--            <a href="#"></a>-->
+<!--        </ol>-->
+<!--        <div>-->
+<!--        	<li></li>-->
+<!--            <ul>-->
+<!--            	<li>-->
+<!--                	<p>创意甜橙味蛋糕</p>-->
+<!--                    <span>净含量：250克</span>-->
+<!--                </li>-->
+<!--                <li class="price">¥29.00</li>-->
+<!--                <li class="price">x1</li>-->
+<!--                <li>-->
+<!--                	<a href="#">联系我们</a>-->
+<!--                    <a href="#" class="text02">申请售后</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                	<a href="#">订单详情</a>-->
+<!--                    <a href="#" class="text02">查看物流</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--         <ol>-->
+<!--        	<input type="checkbox">-->
+<!--            <p>2017-9-12&nbsp;&nbsp;&nbsp;&nbsp;订单号：124537468977</p>-->
+<!--            <a href="#"></a>-->
+<!--        </ol>-->
+<!--        <div>-->
+<!--        	<li class="pic02"></li>-->
+<!--            <ul>-->
+<!--            	<li>-->
+<!--                	<p>创意心形蛋糕</p>-->
+<!--                    <span>净含量：250克</span>-->
+<!--                </li>-->
+<!--                <li class="price">¥59.00</li>-->
+<!--                <li class="price">x1</li>-->
+<!--                <li>-->
+<!--                	<a href="#">联系我们</a>-->
+<!--                    <a href="#" class="text02">申请售后</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                	<a href="#">订单详情</a>-->
+<!--                    <a href="#" class="text02">查看物流</a>-->
+<!--                </li>-->
+<!--                <a href="#">评价</a>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <ol>-->
+<!--        	<input type="checkbox">-->
+<!--            <p>2017-8-25&nbsp;&nbsp;&nbsp;&nbsp;订单号：680945239418</p>-->
+<!--            <a href="#"></a>-->
+<!--        </ol>-->
+<!--        <div>-->
+<!--        	<li class="pic03"></li>-->
+<!--            <ul>-->
+<!--            	<li>-->
+<!--                	<p>表白首选-蝴蝶粉蛋</p>-->
+<!--                    <span>净含量：50克</span>-->
+<!--                </li>-->
+<!--                <li class="price">¥139.00</li>-->
+<!--                <li class="price">x1</li>-->
+<!--                <li>-->
+<!--                	<a href="#">联系我们</a>-->
+<!--                    <a href="#" class="text02">申请售后</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                	<a href="#">订单详情</a>-->
+<!--                    <a href="#" class="text02">查看物流</a>-->
+<!--                </li>-->
+<!--                <a href="#">评价</a>-->
+<!--            </ul>-->
+<!--        </div>-->
+<!--        <ol>-->
+<!--        	<input type="checkbox">-->
+<!--            <p>2017-8-5&nbsp;&nbsp;&nbsp;&nbsp;订单号：456745239418</p>-->
+<!--            <a href="#"></a>-->
+<!--        </ol>-->
+<!--        <div>-->
+<!--        	<li class="pic04"></li>-->
+<!--            <ul>-->
+<!--            	<li>-->
+<!--                	<p>自然系列蛋糕</p>-->
+<!--                    <span>净含量：250克</span>-->
+<!--                </li>-->
+<!--                <li class="price">¥89.00</li>-->
+<!--                <li class="price">x1</li>-->
+<!--                <li>-->
+<!--                	<a href="#">联系我们</a>-->
+<!--                    <a href="#" class="text02">申请售后</a>-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                	<a href="#">订单详情</a>-->
+<!--                    <a href="#" class="text02">查看物流</a>-->
+<!--                </li>-->
+<!--                <a href="#">评价</a>-->
+<!--            </ul>-->
+<!--        </div>-->
     </div>
     <ol>
     	<a href="#" id="left"><li>&lt;</li></a>
@@ -255,5 +256,133 @@
         <span>版权所有 京ICP备14049645号-1 增值电信业务经营许可证：京ICP证160100号</span>
     </li>
 </div>
+<script>
+    function showAllOrder() {
+        $(function () {
+            $.ajax({
+                url: "http://localhost:8080/order/allList",
+                type: "GET",
+                success: function (result) {
+                    if (result.status === 20000) {
+                        $(".left > p").text(result.data[0].userName)
+                        showOrder(result.data)
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        })
+    }
+
+    function showOrderByStatus(status) {
+        $(function () {
+            $.ajax({
+                url: "http://localhost:8080/order/list",
+                type: "GET",
+                data: {
+                    status: status
+                },
+                success: function (result) {
+                    if (result.status === 20000) {
+                        showOrder(result.data)
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        })
+    }
+
+    function deleteOrder(orderNo) {
+        $(function () {
+            if (confirm("确定删除吗？")) {
+                $.ajax({
+                    url: "http://localhost:8080/order/deleteOrder",
+                    type: "POST",
+                    data: {
+                        orderNo: orderNo
+                    },
+                    success: function (result) {
+                        if (result.status === 20000 && result.data === 1) {
+                            showAllOrder();
+                        }
+                    },
+                    error: function () {
+                        alert("error");
+                    }
+                });
+            }
+        })
+    }
+
+    function showOrder(orderList) {
+        $(".right ol").remove();
+        $(".right div").remove();
+        let $right = $(".right");
+        for (const order of orderList) {
+            let $ol = $("<ol>");
+            $ol.appendTo($right)
+                .append(
+                    $("<input>").attr("type","checkbox")
+                )
+                .append(
+                    $("<p>").text(order.createTime  + "订单号：" + order.orderNo)
+                )
+                .append(
+                    $("<a>").attr("href","javascript:").click(function () {
+                        deleteOrder(order.orderNo)
+                    })
+                )
+
+            let $div = $("<div>")
+            $div.appendTo($right)
+                .append(
+                    $("<li>").css("background-image","url(img/order_pic_03.jpg)")
+                )
+                .append(
+                    $("<ul>")
+                        .append(
+                            $("<li>")
+                                .append(
+                                    $("<p>").text(order.productName)
+                                )
+                                .append(
+                                    $("<span>")
+                                )
+                        )
+                        .append(
+                            $("<li>").attr("class","price").text("￥" + order.price)
+                        )
+                        .append(
+                            $("<li>").attr("class","price").text("x" + order.count)
+                        )
+                        .append(
+                            $("<li>")
+                                .append(
+                                    $("<a>").attr("href","#").text("联系我们")
+                                )
+                                .append(
+                                    $("<a>").attr("href","#").attr("class","text02").text("申请售后")
+                                )
+                        )
+                        .append(
+                            $("<li>")
+                                .append(
+                                    $("<a>").attr("href","#").text("订单详情")
+                                )
+                                .append(
+                                    $("<a>").attr("href","#").attr("class","text02").text("查看物流")
+                                )
+                        )
+                )
+        }
+    }
+
+    $(function () {
+        showAllOrder();
+    })
+</script>
 </body>
 </html>

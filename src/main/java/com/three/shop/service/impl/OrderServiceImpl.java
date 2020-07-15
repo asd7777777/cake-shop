@@ -88,15 +88,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-
-    public int generateOrder(OrderDto orderDto){
+    @Transactional
+    public int generateOrder(OrderDto orderDto) throws ServiceException {
         String orderNo = GenerateCodeUtil.createCodeNum("OR");
         List<CartsDto> cartsDtos = orderDto.getCarts();
 
         //总价
         BigDecimal total = new BigDecimal(0);
+        //减少库存
         for (CartsDto cartsDto : cartsDtos) {
-            //减少库存
             Integer productId = cartsDto.getProductId();
             Product product = productMapper.selectByPrimaryKey(productId);
             //获取库存
@@ -105,32 +105,18 @@ public class OrderServiceImpl implements OrderService {
             if (stock >= count) {
                 stock -= count;
                 int i = productMapper.updateStockById(productId, stock);
-//                if (i == 0) {
-//                    throw new ServiceException(Status.SERVICE_ERROR);
-//                }
-                //该商品总价
+                if (i == 0) {
+                    throw new ServiceException(Status.SERVICE_ERROR);
+                }
+                //该商品总价（单价*数量）
                 BigDecimal num = new BigDecimal(count);
                 BigDecimal price = product.getPrice();
                 BigDecimal multiply = price.multiply(num);
                 //全部商品总价
-                total.add(multiply);
+                total = total.add(multiply);
             } else {
-//                throw new ServiceException(Status.SERVICE_ERROR);
-                return 0;
+                throw new ServiceException(Status.SERVICE_ERROR);
             }
-            //保存订单详情
-            OrderDetail orderDetail = new OrderDetail();
-            orderDetail.setOrderNo(orderNo);
-            orderDetail.setCount(count);
-            orderDetail.setPrice(product.getPrice());
-            orderDetail.setProductId(productId);
-            orderDetail.setProductName(product.getName());
-            orderDetail.setProductPic(product.getImg());
-            int insert = orderDetailMapper.insert(orderDetail);
-//            if (insert == 0) {
-//                throw new ServiceException(Status.SERVICE_ERROR);
-//                return 0;
-//            }
         }
         //保存订单
         Order order = new Order();
@@ -138,9 +124,35 @@ public class OrderServiceImpl implements OrderService {
         order.setOrderNo(orderNo);
         order.setTotal(total);
         order.setUserId(orderDto.getUserId());
-        int j = orderMapper.insert(order);
+        int j = orderMapper.insertOrder(order);
+        if (j == 0) {
+            throw new ServiceException(Status.SERVICE_ERROR);
+        }
 
+        //保存订单详情
+        for (CartsDto cartsDto : cartsDtos) {
+            Integer productId = cartsDto.getProductId();
+            Product product = productMapper.selectByPrimaryKey(productId);
+
+            OrderDetail orderDetail = new OrderDetail();
+            orderDetail.setOrderNo(orderNo);
+            orderDetail.setCount(cartsDto.getCount());
+            orderDetail.setPrice(product.getPrice());
+            orderDetail.setProductId(productId);
+            orderDetail.setProductName(product.getName());
+            orderDetail.setProductPic(product.getImg());
+            int insert = orderDetailMapper.insertOrderDetail(orderDetail);
+            if (insert == 0) {
+                throw new ServiceException(Status.SERVICE_ERROR);
+            }
+        }
         return j;
+    }
+
+    @Override
+    public int removeOrderByOrderNo(String orderNo) {
+        int count = orderMapper.deleteOrderByOrderNo(orderNo);
+        return count;
     }
 
 
