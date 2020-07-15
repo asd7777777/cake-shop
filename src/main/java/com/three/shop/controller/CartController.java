@@ -51,16 +51,12 @@ public class CartController {
      * @return 封装了修改结果的 JavaBean
      * @throws ServiceException 异常
      */
-    @PutMapping("/updateCart")
+    @PostMapping("/updateCart")
     public ResultVo<ResultDto<Integer>> updateCart(@RequestParam("cartId") String cartId,
                                                    @RequestParam("quantity") String quantity) throws ServiceException {
         // 修改
         ResultDto<Integer> resultDto = cartService.updateCart(cartId, quantity);
-        if (resultDto.getData() != null) {
-            return ResultVo.success(resultDto, StatusEnum.SUCCESS);
-        } else {
-            return ResultVo.error(StatusEnum.SERVICE_ERROR);
-        }
+        return ResultVo.success(resultDto, StatusEnum.SUCCESS);
     }
 
     @PostMapping("/saveCart")
@@ -82,7 +78,7 @@ public class CartController {
      * @return 封装了修改结果的 JavaBean
      * @throws ServiceException 异常
      */
-    @PutMapping("/deleteCart")
+    @PostMapping("/deleteCart")
     public ResultVo<ResultDto<Integer>> deleteCart(@RequestParam("cartId") String cartId) throws ServiceException {
         // 删除
         ResultDto<Integer> resultDto = cartService.deleteCart(cartId);

@@ -19,6 +19,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <junit.version>4.12</junit.version>
         <spring.version>5.2.6.RELEASE</spring.version>
+        <servlet.version>4.0.1</servlet.version>
         <jackson.version>2.11.1</jackson.version>
         <mybatis.version>3.5.5</mybatis.version>
         <mybatis.spring.version>2.0.5</mybatis.spring.version>
@@ -63,6 +64,14 @@
             <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <!-- servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- json 包 -->

@@ -31,6 +31,14 @@ public interface CartMapper {
     List<Cart> selectByUserIdAndProductId(@Param("userId") int userId, @Param("productId") int productId);
 
     /**
+     * 根据传入的 购物车 id查询购物车内容
+     *
+     * @param cartId 购物车 id
+     * @return cart 对象
+     */
+    Cart selectByCartId(@Param("cartId") int cartId);
+
+    /**
      * 根据传入的 Cart 对象进行修改：数量、状态(假删除)
      *
      * @param cart Cart 对象

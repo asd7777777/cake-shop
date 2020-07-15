@@ -67,14 +67,47 @@ public class CartServiceImpl implements CartService {
             // 参数异常
             return ResultDto.error(StatusEnum.PARAM_ERROR);
         }
-        Cart cart = new Cart();
-        // 设置数据
+        // 购物车 id
+        int id = 0;
+        // 数量
+        int num = 0;
         try {
-            cart.setCartId(Integer.parseInt(cartId));
-            cart.setProductQuantity(Integer.parseInt(quantity));
+            id = Integer.parseInt(cartId);
+            num = Integer.parseInt(quantity);
         } catch (NumberFormatException e) {
             throw new ServiceException(Status.SERVICE_ERROR);
         }
+        // 判断 id 信息
+        if (id <= 0) {
+            return ResultDto.error(StatusEnum.PARAM_ERROR);
+        }
+        // 查询购物车信息
+        Cart cartInfo = cartMapper.selectByCartId(id);
+        // 非空判断
+        if (cartInfo == null) {
+            return ResultDto.error(StatusEnum.PARAM_ERROR);
+        }
+        // 查询库存信息
+        // 查询当前商品的库存
+        ProductDetail productDetail = null;
+        try {
+            // 因为 size 不能设置为 unique，如果添加商品时同一个商品的 size 不添加判断，那么有可能重复，则有可能查询多个
+            productDetail = productDetailMapper.selectByProductIdAndSize(cartInfo.getProductId(), cartInfo.getProductSize());
+        } catch (Exception e) {
+            return ResultDto.error(StatusEnum.DAO_ERROR);
+        }
+        // 非空判断
+        if (productDetail == null) {
+            return ResultDto.error(StatusEnum.DAO_ERROR);
+        }
+        // 判断库存，判断数量
+        if (num > productDetail.getStock() || num < 1) {
+            return ResultDto.error(StatusEnum.STOCK_ERROR);
+        }
+        Cart cart = new Cart();
+        // 设置数据
+        cart.setCartId(id);
+        cart.setProductQuantity(num);
         // 修改
         int rows = cartMapper.updateCart(cart);
         // 判断修改结果

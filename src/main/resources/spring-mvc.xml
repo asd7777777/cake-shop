@@ -10,4 +10,9 @@
     </mvc:annotation-driven>
 
     <!--    文件上传相关-->
+    <mvc:default-servlet-handler/>
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".html"/>
+    </bean>
 </beans>

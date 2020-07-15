@@ -56,4 +56,11 @@
         from tb_cart
         where user_id=#{userId} and product_id=#{productId}
     </select>
+
+    <select id="selectByCartId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_cart
+        where cart_id=#{cartId}
+    </select>
 </mapper>
