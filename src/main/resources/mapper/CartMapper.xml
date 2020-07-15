@@ -24,7 +24,7 @@
         select
         <include refid="Base_Column_List"/>
         from tb_cart
-        where user_id=#{userId}
+        where user_id=#{userId} and status=1
     </select>
 
     <update id="updateCart">
