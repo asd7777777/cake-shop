@@ -136,11 +136,11 @@
     where email=#{email} and status=1
   </select>
   <select id="selectByNameAndPhoneAndEmail" resultMap="BaseResultMap">
-    select user_id, username, password, email, phone, create_time, status
+    select user_id, username, password, email, phone
     from user
-    <trim prefix="where" prefixOverrides="or|and">
+    <trim prefix="where" prefixOverrides="or">
       <if test="user.username != null and user.username != ''">
-        or username = #{user.username}
+         username = #{user.username}
       </if>
       <if test="user.password != null and user.password != ''">
         or password = #{user.password}

@@ -7,6 +7,127 @@
 <title>我的甜品，你的爱~</title>
 <link rel="shortcut icon" href="images/logo_01.png">
 <link rel="stylesheet" href="css/xiangqing.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+        $(function () {
+            let data = {
+                productId:1
+            };
+            $.ajax({
+                url:'http://localhost:8080/product',
+                type:'GET',
+                data:data,
+                success:function (result) {
+                    if (result.status == 20000 && result.msg == "成功") {
+                        // 获取后端传过来的data对象
+                        let product = result.data;
+                        // 通过class选择器获取ul标签
+                        let $ul = $(".title");
+                        // 往ul里面添加一个li标签并动态的添加内容
+                        $ul.prepend(
+                            $("<li>").text(product.title)
+                        )
+                        // 获取div标签
+                        let $div = $(".pic");
+                        // 获取商品详情集合
+                        let productDetail = result.data.productDetailDtoList;
+                        $div.append(
+                            $("<ol>")
+                                .append(
+                                    $("<img>").attr("src","../cake/img/" + productDetail[0].img).css({"width":"720px"})
+                                )
+                        )
+                        // 获取ul标签
+                        let $ul2 = $(".pic2");
+                        $ul2.append(
+                            $("<li>")
+                                .append(
+                                    $("<img>").attr("src","../cake/img/" + productDetail[1].img).css({"width":"150px","height":"120px"})
+                                )
+                        )
+                            .append(
+                                $("<li>")
+                                    .append(
+                                        $("<img>").attr("src","../cake/img/" + productDetail[2].img).css({"width":"150px","height":"120px"})
+                                    )
+                            )
+                            .append(
+                                $("<li>")
+                                    .append(
+                                        $("<img>").attr("src","../cake/img/" + productDetail[3].img).css({"width":"150px","height":"120px"})
+                                    )
+                            )
+                            .append(
+                                $("<li>")
+                                    .append(
+                                        $("<img>").attr("src","../cake/img/" + productDetail[4].img).css({"width":"150px","height":"120px"})
+                                    )
+                            )
+
+                        // 获取span标签
+                        let $span = $(".price");
+                        $span.prepend(
+                            $("<h2>").text("¥" + productDetail[0].price + "~" + productDetail[4].price)
+                        )
+                        // 获取input标签
+                        let $li1 = $(".size1");
+                        $li1.append(
+                            $("<span>").text(productDetail[0].size)
+                        )
+                        // 获取input标签
+                        let $li2 = $(".size2");
+                        $li2.append(
+                            $("<span>").text(productDetail[1].size)
+                        )
+                        // 获取input标签
+                        let $li3 = $(".size3");
+                        $li3.append(
+                            $("<span>").text(productDetail[2].size).append($("<br>"))
+                        )
+                        // 获取input标签
+                        let $li4 = $(".size4");
+                        $li4.append(
+                            $("<span>").text(productDetail[3].size)
+                        )
+                        // 获取input标签
+                        let $li5 = $(".size5");
+                        $li5.append(
+                            $("<span>").text(productDetail[4].size)
+                        )
+                    }
+                }
+            })
+            $(".car").click(function () {
+                let num = $(".num").val();
+            })
+        })
+        // /减数量
+        function reductionOf(obj) {
+            //减前判断
+            if ($(obj).next().val() == '') {
+                $(obj).next().val(1);
+            }
+            $(obj).next().val(parseInt($(obj).next().val()) - 1);//数值减
+            $(obj).next().val($(obj).next().val());//赋值给框
+        };
+        //加数量
+        function add(obj) {
+            //加前判断
+            if ($(obj).prev().val() == '') {
+                $(obj).prev().val(1);
+            }
+            $(obj).prev().val(parseInt($(obj).prev().val()) + 1);//数值加
+            $(obj).prev().val($(obj).prev().val());//赋值给框
+        };
+        //校验数字格式（只能输入正整数）
+        function checkNumber(obj) {
+            let reg = /^[1-9]\d*$/;
+            if(!reg.test($(obj).val()) || $(obj).val()==''){
+                $(obj).val(1);
+            }
+        }
+
+    </script>
 </head>
 
 <body>
@@ -15,8 +136,8 @@
 	<div>
     	<p>我的甜品 你的爱~</p>
         <ol>
-            <li><a href="login.html">请登录</a></li>
-            <li><a href="../register.html">注册</a></li>
+            <li><a href="../cake/login.html">请登录</a></li>
+            <li><a href="../cake/register.html">注册</a></li>
             <a href="order.html">我的订单</a>
             <a href="shoppingCar.html" class="shoppingCar">
             	<i></i>
@@ -41,8 +162,8 @@
 </div>
 <!--内容-->
 <div id="contentCon">
-	<ul>
-    	<li>意式经典-提拉米苏</li>
+	<ul class="title">
+<!--    	<li>意式经典-提拉米苏</li>-->
         <li class="right">
             <a href="#">概述</a>
             <a href="#">图集</a>
@@ -51,21 +172,22 @@
         </li>
     </ul>
     <div id="show">
-    	<div>
-        	<ul>
-            	<li></li>
+    	<div class="pic">
+        	<ul class="pic2">
+            	<!--<li></li>
                 <li class="pic02"></li>
                 <li class="pic03"></li>
-                <li class="pic04"></li>
+                <li class="pic04"></li>-->
             </ul>
-            <ol></ol>
+<!--            <ol></ol>-->
         </div>
         <div class="right">
         	<p>【自营】 味多美 提拉米苏 巧克力口味</p>
             <div>
             	<ul>
-                	<span>¥</span>
-                	<h2>25.90~159.90</h2>
+                	<span class="price"></span>
+<!--                	<h2>25.90~159.90</h2>-->
+
                     <p>（降价通知）</p>
                 </ul>
                 <ol>
@@ -85,7 +207,7 @@
                 </li>
             </div>
             <ul>
-            	<li class="check01">
+            	<!--<li class="check01">
                     <p>规格</p>
                     <span>18寸蛋糕</span>
                     <span>14寸蛋糕</span>
@@ -94,11 +216,47 @@
                 <li>
                 	<span>小蛋糕</span>
                     <span>双心蛋糕</span>
-                </li>
-                <ol>
+                </li>-->
+                <from>
+                    <li class="check01">
+                        <p>规格</p>
+                        <li class="size1">
+                        <input type="radio" name="size" >
+                        </li>
+<!--                        <span>18寸蛋糕</span>-->
+                        <li class="size2">
+                        <input type="radio" name="size" >
+                        </li>
+<!--                        <span>18寸蛋糕</span>-->
+                        <li class="size3">
+                        <input type="radio" name="size" >
+                        </li>
+<!--                        <span>18寸蛋糕</span><br/>-->
+                        <li class="size4">
+                        <input type="radio" name="size" >
+                        </li>
+<!--                        <span>18寸蛋糕</span>-->
+                        <li class="size5">
+                        <input type="radio" name="size" >
+                        </li>
+<!--                        <span>18寸蛋糕</span>-->
+                    </li>
+
+                </from>
+                <!--<ol>
                     <p>数量</p>
                     <a href="">-</a><input value="1"><a href="">+</a>
-            	</ol>
+            	</ol>-->
+                <div style="width: 160px">
+
+                    <div>数量</div>
+                    <input style="width: 50px; height: 38px; border: 2px white; float: left;" type="button" value="-" onclick="reductionOf(this)" />
+
+                    <input style="text-align: center; width: 50px; height: 32px; float: left;" type="text" value="1" onblur="checkNumber(this)" class="num" />
+
+                    <input style="width: 50px; height: 38px; border: 2px white;" type="button" value="+" onclick="add(this)" />
+
+                </div>
                 <a href="pay.html" class="buy">立刻购买</a>
                 <a href="shoppingCar.html" class="car">加入购物车</a>
                 <a href="#" class="love"></a>
@@ -185,7 +343,7 @@
         </ul>
         <ol></ol>
     </div>
-    <div id="show">
+    <div id="shop">
     	<ul>
         	<div>
             	<p>Show</p>

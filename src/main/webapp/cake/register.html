@@ -1,0 +1,197 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta name="keywords" content="甜爱，SweetLove,甜品，甜点，生日蛋糕，冰淇淋，冰品"/>
+<meta name="description" content="甜爱网上商城是专注于甜品销售、进口的网站，各种甜品、甜点齐全，还有解暑的各种冰品任顾客挑选，让他们感受到爱的温馨。">
+<meta charset="utf-8">
+<title>欢迎注册！</title>
+<link rel="shortcut icon" href="cake/img/logo_01.jpg">
+<link rel="stylesheet" href="css/register.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+                let username = $(".name").val();
+                let phone = $(".phone").val();
+                let password = $(".pass").val();
+                let confirmPassword = $(".confirm").val();
+                let email = $(".email").val();
+                let verificationCode = $(".code").val();
+                if (!(username == null || username == "")) {
+                    if (!(phone == null || phone == "")) {
+                        if(!(password == null || password == "")) {
+                            if (password == confirmPassword) {
+                                if (!(email == null || email == "")) {
+                                    if (!(verificationCode == null || verificationCode == "")) {
+                                        let data = JSON.stringify({'username':username,'phone':phone,'password':password,'email':email})
+                                        $.ajax({
+                                            type:'POST',
+                                            data:data,
+                                            url:'http://localhost:8080/register',
+                                            contentType:'application/json;utf-8',
+                                            success:function (result) {
+                                                if (result.status == 20000 && result.msg == "成功") {
+                                                    alert("注册成功")
+                                                    window.location.href = "http://localhost:8080/cake/login.html";
+                                                }
+                                            }
+                                        })
+                                    }else {
+                                        alert("验证码不能为空")
+                                    }
+                                }else {
+                                    alert("邮箱不能为空")
+                                }
+                            }else {
+                                alert("密码两次输入不一样,请重新输入")
+                            }
+                        }else {
+                            alert("密码不能为空")
+                        }
+                    }else{
+                        alert("电话号码不能为空")
+                    }
+                }else {
+                    alert("用户名不能为空")
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+<!--页头-->
+<div id="headCon">
+	<div>
+    	<p>我的甜品 你的爱~</p>
+    </div>
+    <ul>
+    	<a href="index.html"><li></li></a>
+        <span></span>
+        <p>请注册</p>
+    </ul>
+</div>
+<!--内容-->
+<div id="contentCon">
+
+	<div>
+    	<p>注册</p>
+    </div>
+    <form>
+        <ul>
+            <span>用户名称:</span><input class="name" type="text" placeholder="请输入用户名" name="username" >
+        </ul>
+        <ul class="box02">
+            <span>手机号码:</span><input class="phone" type="number" placeholder="请输入手机号码" name="phone">
+        </ul>
+        <ul class="box02">
+            <span>请输入邮箱:</span><input class="email" type="email" placeholder="请输入邮箱" name="email">
+        </ul>
+        <ul class="box02">
+            <span>设置密码:</span><input class="pass" type="password" placeholder="6~16位数字和字母组合" name="password">
+        </ul>
+        <ul class="box02">
+            <span>确认密码:</span><input class="confirm" type="password" placeholder="请再次输入密码" name="confirmPassword">
+        </ul>
+
+        <!--<ol>
+        	<p>验证码：</p>
+            <input type="tel">
+            <a href="#">获取验证码</a>
+        </ol>-->
+        <div>
+            <span>图形验证码:</span><input class="code" type="text"  name="verificationCode">
+            <img src="../cake/img/yanking_03.jpg">
+        </div>
+        <div>
+            <input type="radio"  name="a" value="">我已我已阅读并同意<span><a href="http://www.baidu.com">《甜爱服务协议》</a></span>
+        </div>
+        <div>
+            <button id="btn" type="button" value="按钮">注册</button>
+        </div>
+
+    </form>
+
+</div>
+<!--页脚-->
+<div id="footCon">
+	<ul>
+    	<li>
+        	<div class="cold"></div>
+            <span></span>
+            <ol>
+            	<h2>18小时低温</h2>
+            	<p>全程冷链配送</p>
+            </ol>
+        </li>
+        <li>
+        	<div class="wuxiu"></div>
+            <span></span>
+            <ol>
+            	<h2>7*24小时营业</h2>
+            	<p>全年无休</p>
+            </ol>
+        </li>
+        <li>
+        	<div class="baoyou"></div>
+            <span></span>
+            <ol>
+            	<h2>满88包邮</h2>
+            	<p>次日送达</p>
+            </ol>
+        </li>
+    </ul>
+    <ol>
+    	<li>
+        	<i></i>
+            <a href="index.html">www.sweetlove.com</a>
+            <div>
+            	<a href="http://www.weibo.com" class="weibo"></a>
+                <a href="http://wx.qq.com" class="weixin"></a>
+            </div>
+        </li>
+        <ul>
+        	<li class="text01">
+            	<p>关于甜爱</p>
+                <span></span>
+                <a href="#">媒体报道</a>
+                <a href="#">知识产权</a>
+                <a href="#">加入我们</a>
+            </li>
+            <li>
+            	<p>帮助中心</p>
+                <span></span>
+                <a href="#">购物指南</a>
+                <a href="#">订单管理</a>
+                <a href="#">常见问题</a>
+            </li>
+            <li>
+            	<p>服务支持</p>
+                <span></span>
+                <a href="#">服务保障</a>
+                <a href="#">用户协议</a>
+                <a href="#">售后服务</a>
+            </li>
+            <li>
+            	<p>商业合作</p>
+                <span></span>
+                <a href="#">集合采购</a>
+                <a href="#">品牌合作</a>
+                <a href="#">媒体合作</a>
+            </li>
+        </ul>
+        <div>
+        	<p>联系我们</p>
+            <h2>400-8888-000</h2>
+            <span>24小时服务热线</span>
+            <a href="#">在线客服</a>
+        </div>
+    </ol>
+    <div></div>
+    <li>
+        <p>Copyright © 2016 sweetlove.com Inc.All Rights Reserved. 北京甜爱食品有限公司</p>
+        <span>版权所有 京ICP备14049645号-1 增值电信业务经营许可证：京ICP证160100号</span>
+    </li>
+</div>
+</body>
+</html>
