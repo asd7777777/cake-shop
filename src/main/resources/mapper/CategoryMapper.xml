@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.shop.mapper.CategoryMapper">
+    <resultMap id="BaseResultMap" type="com.three.shop.domain.entity.Category">
+        <!--@mbg.generated-->
+        <!--@Table category-->
+        <id column="category_id" jdbcType="INTEGER" property="categoryId"/>
+        <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        category_id, category_name, create_time, update_time, `status`
+    </sql>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from category c
+        where c.status=1
+    </select>
+
+</mapper>
