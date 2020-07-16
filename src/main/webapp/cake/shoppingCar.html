@@ -630,13 +630,13 @@
                             if (data != null) {
                                 if (data.status === 20000 && data.message === "success") {
                                     alert("成功修改" + data.data + "条数据");
-                                    // 清空购物车信息
-                                    $("#cart_content").empty();
-                                    // 重新展示购物车信息
-                                    showCart(_userId);
                                 } else {
                                     alert("库存不足");
                                 }
+                                // 清空购物车信息
+                                $("#cart_content").empty();
+                                // 重新展示购物车信息
+                                showCart(_userId);
                             } else {
                                 alert("修改失败");
                             }
