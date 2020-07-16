@@ -21,8 +21,8 @@ public class OrderController {
 
     @GetMapping("/allList")
     public ResponseEntity<List<OrderVo>> allList(HttpSession session, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "4") int size) {
-//        LoginDto loginDto = (LoginDto)session.getAttribute("LoginDto");
-        List<OrderVo> orderVos = orderService.orderList(1, page, size);
+        LoginDto loginDto = (LoginDto)session.getAttribute("LoginDto");
+        List<OrderVo> orderVos = orderService.orderList(loginDto.getUserId(), page, size);
         return ResponseEntity.success(orderVos);
     }
 
