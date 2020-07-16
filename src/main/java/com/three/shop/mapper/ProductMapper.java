@@ -11,9 +11,6 @@ import org.apache.ibatis.annotations.Param;
  * @since JDK 1.8
  */
 public interface ProductMapper {
-    int deleteByPrimaryKey(Integer productId);
-
-    int insert(Product record);
 
     int insertSelective(Product record);
 

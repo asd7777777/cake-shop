@@ -1,20 +1,19 @@
 package com.three.shop.domain.entity;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
 /**
- * Description：
- *
- * @author sheng
- * @date 2020/7/14 21:04
- * @since JDK 1.8
+ * @author Administrator
  */
 @Data
-public class ProductDetail {
+public class ProductDetail implements Serializable {
+
     /**
-     * 主键,商品详情id
+     * 商品详情ID
      */
     private Integer productDetailId;
 
@@ -29,17 +28,17 @@ public class ProductDetail {
     private BigDecimal price;
 
     /**
-     * 上架时间
+     * 商品上架时间
      */
     private Date createTime;
 
     /**
-     * 下架时间
+     * 商品下架时间
      */
     private Date unloadTime;
 
     /**
-     * 1代表正常,0代表下架
+     * 商品状态 ,1代表正常,0代表下架
      */
     private Integer status;
 

@@ -2,6 +2,9 @@ package com.three.shop.utils;
 
 import lombok.Data;
 
+/**
+ * @author Administrator
+ */
 @Data
 public class ResponseEntity<T> {
     private int status;

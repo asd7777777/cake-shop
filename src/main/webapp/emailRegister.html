@@ -4,42 +4,9 @@
     <meta name="keywords" content="甜爱，SweetLove,甜品，甜点，生日蛋糕，冰淇淋，冰品"/>
     <meta name="description" content="甜爱网上商城是专注于甜品销售、进口的网站，各种甜品、甜点齐全，还有解暑的各种冰品任顾客挑选，让他们感受到爱的温馨。">
     <meta charset="utf-8">
-    <title>请登录</title>
-    <link rel="shortcut icon" href="images/logo_01.png">
-    <link rel="stylesheet" href="css/login.css">
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.js"></script>
-    <script>
-        $(function () {
-            $("#btn").click(function () {
-                let username = $(".name").val();
-                let password = $(".pass").val();
-                if (username == null || username == "" ) {
-                    alert("用户名不能为空")
-                } else if( password == null || password == "") {
-                    alert("密码不能为空")
-                }
-                let data = {
-                    username: username,
-                    password: password
-                };
-
-                $.ajax({
-                    type:'GET',
-                    data:data,
-                    url:'http://localhost:8080/login',
-                    contentType:'application/json;utf-8',
-                    success:function (result) {
-                        if (result.status == 20000 && result.msg == "成功") {
-                            window.location.href = "https://www.baidu.com";
-                        }
-                    }
-                })
-
-            })
-        })
-    </script>
+    <title>欢迎注册！</title>
+    <link rel="shortcut icon" href="cake/img/logo_01.png">
+    <link rel="stylesheet" href="cake/css/register.css">
 </head>
 
 <body>
@@ -51,7 +18,7 @@
             <li><a href="#">请登录</a></li>
             <li><a href="#">注册</a></li>
             <a href="#">我的订单</a>
-            <!<a href="#" class="shoppingCar">
+            <!-<a href="#" class="shoppingCar">--
             	<i></i>
             	<span>购物车（0）</span>
             </a>-->
@@ -60,7 +27,7 @@
     <ul>
         <a href="index.html"><li></li></a>
         <span></span>
-        <p>请登录</p>
+        <p>请注册</p>
         <!--<ol>
             <li>
             	<div class="my"><img src="img/shopcar_08.png"></div>
@@ -84,49 +51,46 @@
 <!--内容-->
 <div id="contentCon">
     <div>
-        <ul>
-            <li>
-                <p>普通登录</p>
-                <span>快捷登录</span>
-            </li>
-            <div id="div">
-                <form>
-                    <div>
-                        <input type="text" class="name" name="username"  placeholder="用户名">
-                    </div>
-                    <div>
-                        <input type="password" class="pass" name="password"  placeholder="密码">
-                    </div>
-                    <div>
-                        <button id="btn" type="button" class="btn btn-default btn-info">Login</button>
-                    </div>
-                </form>
-            </div>
-            <div>
-                <a href="#">忘记密码？</a>
-                <a href="register.html" class="text02">去注册</a>
-            </div>
-            <ol>
-                <span></span>
-                <p>其他登录方式</p>
-                <i></i>
-            </ol>
-            <div class="other">
-                <span>
-                    <a href="http://www.qq.com" class="QQ"></a>
-                    <p>QQ</p>
-                </span>
-                <span class="middle">
-                    <a href="http://wx.qq.com" class="weixin"></a>
-                    <p>微信</p>
-                </span>
-                <span>
-                    <a href="http://www.weibo.com" class="weibo"></a>
-                    <p>微博</p>
-                </span>
-            </div>
-        </ul>
+        <p>邮箱注册</p>
+        <li>手机号注册</li>
     </div>
+    <form>
+        <ul>
+            <p>用户名称 ：</p>
+            <input type="text" placeholder="请输入用户名">
+        </ul>
+        <ul class="box02">
+            <p>电子邮箱：</p>
+            <input type="text" placeholder="请输入邮箱号">
+        </ul>
+        <ul class="box02">
+            <p>设置密码：</p>
+            <input type="text" placeholder="6~16位字母或数字的组合">
+        </ul>
+        <ul class="box02">
+            <p>确认密码：</p>
+            <input type="text" placeholder="请再次输入密码">
+        </ul>
+        <div>
+            <p>图形验证码：</p>
+            <input type="text">
+            <i></i>
+            <span>看不清？</span>
+            <a href="#">换一张</a>
+        </div>
+        <!--<ol>
+        	<p>验证码：</p>
+            <input type="tel">
+            <a href="#">获取验证码</a>
+        </ol>-->
+        <li>
+            <input type="radio">
+            <p>我已阅读并同意</p>
+            <a href="#">《甜爱服务协议》</a>
+        </li>
+        <a href="cake/login.test.html">注册</a>
+    </form>
+
 </div>
 <!--页脚-->
 <div id="footCon">

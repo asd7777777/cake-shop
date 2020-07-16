@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.shop.mapper.ProductDetailDtoMapper">
+    <resultMap id="ProductDetailDtoMap" type="com.three.shop.domain.dto.ProductDetailDto">
+        <id property="productDetailId" column="product_detail_id"/>
+        <result property="img" column="img"/>
+        <result property="price" column="price"/>
+        <result property="size" column="size"/>
+    </resultMap>
+
+</mapper>

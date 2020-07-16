@@ -3,6 +3,9 @@ package com.three.shop.utils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Administrator
+ */
 public class GenerateCodeUtil {
 
     /**
@@ -23,7 +26,8 @@ public class GenerateCodeUtil {
     /**
      * 生成订单号
      */
-    public static int index = 100;// 用于生成订单标示，自增
+    // 用于生成订单标示，自增
+    public static int index = 100;
 
     public static synchronized String createCodeNum(String pre) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("YYMMddHHmmss");

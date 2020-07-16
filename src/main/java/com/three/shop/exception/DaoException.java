@@ -2,6 +2,9 @@ package com.three.shop.exception;
 
 import com.three.shop.utils.Status;
 
+/**
+ * @author Administrator
+ */
 public class DaoException extends RuntimeException{
     private int status;
     private String msg;

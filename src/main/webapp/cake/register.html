@@ -5,8 +5,58 @@
 <meta name="description" content="甜爱网上商城是专注于甜品销售、进口的网站，各种甜品、甜点齐全，还有解暑的各种冰品任顾客挑选，让他们感受到爱的温馨。">
 <meta charset="utf-8">
 <title>欢迎注册！</title>
-<link rel="shortcut icon" href="images/logo_01.png">
+<link rel="shortcut icon" href="cake/img/logo_01.jpg">
 <link rel="stylesheet" href="css/register.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+        $(function () {
+            $("#btn").click(function () {
+                let username = $(".name").val();
+                let phone = $(".phone").val();
+                let password = $(".pass").val();
+                let confirmPassword = $(".confirm").val();
+                let email = $(".email").val();
+                let verificationCode = $(".code").val();
+                if (!(username == null || username == "")) {
+                    if (!(phone == null || phone == "")) {
+                        if(!(password == null || password == "")) {
+                            if (password == confirmPassword) {
+                                if (!(email == null || email == "")) {
+                                    if (!(verificationCode == null || verificationCode == "")) {
+                                        let data = JSON.stringify({'username':username,'phone':phone,'password':password,'email':email})
+                                        $.ajax({
+                                            type:'POST',
+                                            data:data,
+                                            url:'http://localhost:8080/register',
+                                            contentType:'application/json;utf-8',
+                                            success:function (result) {
+                                                if (result.status == 20000 && result.msg == "成功") {
+                                                    alert("注册成功")
+                                                    window.location.href = "http://localhost:8080/cake/login.html";
+                                                }
+                                            }
+                                        })
+                                    }else {
+                                        alert("验证码不能为空")
+                                    }
+                                }else {
+                                    alert("邮箱不能为空")
+                                }
+                            }else {
+                                alert("密码两次输入不一样,请重新输入")
+                            }
+                        }else {
+                            alert("密码不能为空")
+                        }
+                    }else{
+                        alert("电话号码不能为空")
+                    }
+                }else {
+                    alert("用户名不能为空")
+                }
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -14,78 +64,54 @@
 <div id="headCon">
 	<div>
     	<p>我的甜品 你的爱~</p>
-        <!--<ol>
-            <li><a href="#">请登录</a></li>
-            <li><a href="#">注册</a></li>
-            <a href="#">我的订单</a>
-            <!--<a href="#" class="shoppingCar">
-            	<i></i>
-            	<span>购物车（0）</span>
-            </a>-->
-        <!--</ol>-->
     </div>
     <ul>
     	<a href="index.html"><li></li></a>
         <span></span>
         <p>请注册</p>
-        <!--<ol>
-            <li>
-            	<div class="my"><img src="img/shopcar_08.png"></div>
-                <p class="red">我的购物车</p>
-            </li>
-            <li>
-            	<div class="order"><img src="img/pay_03.jpg"></div>
-                <p>确认订单</p>
-            </li>
-            <li class="pay">
-            	<div class="pay"><img src="img/pay_05.jpg"></div>
-                <p>支付</p>
-            </li>
-            <li class="bingo">
-            	<div class="bingo"><img src="img/shopcar_05.png"></div>
-                <p>完成</p>
-            </li>
-        </ol>-->
     </ul>
 </div>
 <!--内容-->
 <div id="contentCon">
+
 	<div>
-    	<p>手机注册</p>
-        <li>邮箱注册</li>
+    	<p>注册</p>
     </div>
     <form>
         <ul>
-        	<p>手机号码：</p>
-            <input type="text" placeholder="请输入手机号码">
+            <span>用户名称:</span><input class="name" type="text" placeholder="请输入用户名" name="username" >
         </ul>
         <ul class="box02">
-        	<p>设置密码：</p>
-            <input type="text" placeholder="6~16位字母或数字的组合">
+            <span>手机号码:</span><input class="phone" type="number" placeholder="请输入手机号码" name="phone">
         </ul>
         <ul class="box02">
-        	<p>确认密码：</p>
-            <input type="text" placeholder="请再次输入密码">
+            <span>请输入邮箱:</span><input class="email" type="email" placeholder="请输入邮箱" name="email">
         </ul>
-        <div>
-        	<p>图形验证码：</p>
-        	<input type="text">
-            <i></i>
-            <span>看不清？</span>
-            <a href="#">换一张</a>
-        </div>
-        <ol>
+        <ul class="box02">
+            <span>设置密码:</span><input class="pass" type="password" placeholder="6~16位数字和字母组合" name="password">
+        </ul>
+        <ul class="box02">
+            <span>确认密码:</span><input class="confirm" type="password" placeholder="请再次输入密码" name="confirmPassword">
+        </ul>
+
+        <!--<ol>
         	<p>验证码：</p>
             <input type="tel">
             <a href="#">获取验证码</a>
-        </ol>
-        <li>
-        	<input type="radio">
-            <p>我已阅读并同意</p>
-            <a href="#">《甜爱服务协议》</a>
-        </li>
-        <a href="login.html">注册</a>
+        </ol>-->
+        <div>
+            <span>图形验证码:</span><input class="code" type="text"  name="verificationCode">
+            <img src="../cake/img/yanking_03.jpg">
+        </div>
+        <div>
+            <input type="radio"  name="a" value="">我已我已阅读并同意<span><a href="http://www.baidu.com">《甜爱服务协议》</a></span>
+        </div>
+        <div>
+            <button id="btn" type="button" value="按钮">注册</button>
+        </div>
+
     </form>
+
 </div>
 <!--页脚-->
 <div id="footCon">
