@@ -42,7 +42,7 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
-      <version>${spring.version}</version>
+      <version>5.2.7.RELEASE</version>
     </dependency>
 
     <!-- orm 支持，数据持久层 -->
@@ -74,6 +74,11 @@
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
+    <!--<dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>servlet-api</artifactId>
+      <version>2.5</version>
+    </dependency>-->
 
     <!-- json 包 -->
     <dependency>
@@ -117,11 +122,7 @@
       <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>${servlet.api.version}</version>
-    </dependency>
+
   </dependencies>
 
   <build>

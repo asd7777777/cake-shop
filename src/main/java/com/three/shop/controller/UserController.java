@@ -2,7 +2,6 @@ package com.three.shop.controller;
 
 import com.three.shop.domain.dto.LoginDto;
 import com.three.shop.domain.dto.RegisterDto;
-import com.three.shop.domain.entity.User;
 import com.three.shop.exception.ServiceException;
 import com.three.shop.service.RegisterService;
 import com.three.shop.service.LoginService;
@@ -33,7 +32,7 @@ public class UserController {
     public ResponseEntity<LoginDto> loginController(LoginDto loginDto, HttpSession session) throws ServiceException {
         LoginDto loginDto1 = loginService.selectByNameAndPhoneAndEmailService(loginDto);
         loginDto1.setPassword(null);
-        session.setAttribute("LoginDto", loginDto);
+        session.setAttribute("LoginDto", loginDto1);
         return ResponseEntity.success(loginDto1);
     }
 }

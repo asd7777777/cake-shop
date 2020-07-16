@@ -19,7 +19,7 @@ public class LoginServiceTest {
     @Test
     public void selectByNameAndPhoneAndEmailService() throws ServiceException {
         LoginDto loginDto = new LoginDto();
-        loginDto.setUsername("张三");
+        loginDto.setEmail("123@123.com");
         loginDto.setPassword("123456789");
         LoginDto loginDto1 = loginService.selectByNameAndPhoneAndEmailService(loginDto);
     }

@@ -142,8 +142,8 @@
       <if test="user.username != null and user.username != ''">
          username = #{user.username}
       </if>
-      <if test="user.password != null and user.password != ''">
-        or password = #{user.password}
+      <if test="user.phone != null and user.phone != ''">
+        or phone = #{user.phone}
       </if>
       <if test="user.email != null and user.email != ''">
         or email = #{user.email}
