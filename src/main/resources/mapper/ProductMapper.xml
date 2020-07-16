@@ -82,7 +82,4 @@
       brand = #{brand,jdbcType=VARCHAR}
     where product_id = #{productId,jdbcType=INTEGER}
   </update>
-    <update id="updateStockById">
-      update product set stock=#{stock} where status=1 and product_id=#{productId}
-    </update>
 </mapper>

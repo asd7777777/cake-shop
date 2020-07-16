@@ -23,5 +23,4 @@ public interface ProductMapper {
 
     int updateByPrimaryKey(Product record);
 
-    int updateStockById(@Param("productId") int productId, @Param("stock") int stock);
 }

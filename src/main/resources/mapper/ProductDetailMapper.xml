@@ -149,4 +149,13 @@
         from product_detail
         where product_id=#{productId} and size=#{size}
     </select>
+    <select id="selectById" resultMap="BaseResultMap">
+        select product_detail_id, size, price, create_time, unload_time, status, img, product_id, stock
+        from product_detail
+        where product_id=#{productId}
+    </select>
+
+    <update id="updateStockById">
+        update product_detail set stock=#{stock} where status=1 and product_detail_id=#{productId}
+    </update>
 </mapper>

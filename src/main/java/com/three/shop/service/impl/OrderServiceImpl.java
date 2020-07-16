@@ -2,17 +2,11 @@ package com.three.shop.service.impl;
 
 import com.three.shop.domain.dto.CartsDto;
 import com.three.shop.domain.dto.OrderDto;
-import com.three.shop.domain.entity.Order;
-import com.three.shop.domain.entity.OrderDetail;
-import com.three.shop.domain.entity.Product;
-import com.three.shop.domain.entity.User;
+import com.three.shop.domain.entity.*;
 import com.three.shop.domain.vo.OrderDetailVo;
 import com.three.shop.domain.vo.OrderVo;
 import com.three.shop.exception.ServiceException;
-import com.three.shop.mapper.OrderDetailMapper;
-import com.three.shop.mapper.OrderMapper;
-import com.three.shop.mapper.ProductMapper;
-import com.three.shop.mapper.UserMapper;
+import com.three.shop.mapper.*;
 import com.three.shop.service.OrderService;
 import com.three.shop.utils.GenerateCodeUtil;
 import com.three.shop.utils.Status;
@@ -35,6 +29,8 @@ public class OrderServiceImpl implements OrderService {
     OrderDetailMapper orderDetailMapper;
     @Resource
     ProductMapper productMapper;
+    @Resource
+    ProductDetailMapper productDetailMapper;
 
     //查询全部的OrderVo
     @Override
@@ -98,19 +94,19 @@ public class OrderServiceImpl implements OrderService {
         //减少库存
         for (CartsDto cartsDto : cartsDtos) {
             Integer productId = cartsDto.getProductId();
-            Product product = productMapper.selectByPrimaryKey(productId);
+            List<ProductDetail> productDetail = productDetailMapper.selectById(productId);
             //获取库存
-            Integer stock = product.getStock();
+            Integer stock = productDetail.get(0).getStock();
             Integer count = cartsDto.getCount();
             if (stock >= count) {
                 stock -= count;
-                int i = productMapper.updateStockById(productId, stock);
+                int i = productDetailMapper.updateStockById(productId, stock);
                 if (i == 0) {
                     throw new ServiceException(Status.SERVICE_ERROR);
                 }
                 //该商品总价（单价*数量）
                 BigDecimal num = new BigDecimal(count);
-                BigDecimal price = product.getPrice();
+                BigDecimal price = productDetail.get(0).getPrice();
                 BigDecimal multiply = price.multiply(num);
                 //全部商品总价
                 total = total.add(multiply);
@@ -132,15 +128,16 @@ public class OrderServiceImpl implements OrderService {
         //保存订单详情
         for (CartsDto cartsDto : cartsDtos) {
             Integer productId = cartsDto.getProductId();
+            List<ProductDetail> productDetail = productDetailMapper.selectById(productId);
             Product product = productMapper.selectByPrimaryKey(productId);
 
             OrderDetail orderDetail = new OrderDetail();
             orderDetail.setOrderNo(orderNo);
             orderDetail.setCount(cartsDto.getCount());
-            orderDetail.setPrice(product.getPrice());
+            orderDetail.setPrice(productDetail.get(0).getPrice());
             orderDetail.setProductId(productId);
             orderDetail.setProductName(product.getName());
-            orderDetail.setProductPic(product.getImg());
+            orderDetail.setProductPic(productDetail.get(0).getImg());
             int insert = orderDetailMapper.insertOrderDetail(orderDetail);
             if (insert == 0) {
                 throw new ServiceException(Status.SERVICE_ERROR);
