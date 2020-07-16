@@ -372,7 +372,7 @@
     function showCart(userId) {
         $(function () {
             // 定义 url
-            let url = 'http://localhost:8080/cakeshop/cart/showCart';
+            let url = 'http://localhost:8080/cart/showCart';
             // 参数
             let data = {
                 userId: userId
@@ -546,7 +546,7 @@
                 return false;
             }
             // url
-            let url = "http://localhost:8080/cakeshop/cart/updateCart";
+            let url = "http://localhost:8080/cart/updateCart";
             // 参数
             let data = {
                 "cartId": _cartId,
@@ -608,7 +608,7 @@
                 return false;
             }
             // url
-            let url = "http://localhost:8080/cakeshop/cart/updateCart";
+            let url = "http://localhost:8080/cart/updateCart";
             // 参数
             let data = {
                 "cartId": _cartId,
@@ -658,7 +658,7 @@
     function add(_cartId, _userId, _num) {
         $(function () {
             // url
-            let url = "http://localhost:8080/cakeshop/cart/updateCart";
+            let url = "http://localhost:8080/cart/updateCart";
             // 参数
             let data = {
                 "cartId": _cartId,
@@ -703,7 +703,7 @@
     function deleteCart(_cartId, _userId) {
         $(function () {
             // url
-            let url = "http://localhost:8080/cakeshop/cart/deleteCart";
+            let url = "http://localhost:8080/cart/deleteCart";
             // 参数
             let data = {
                 "cartId": _cartId,
