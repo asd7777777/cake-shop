@@ -1,17 +1,18 @@
 package com.three.shop.mapper;
 
 import com.three.shop.domain.entity.Admin;
+import com.three.shop.domain.entity.Site;
+import com.three.shop.exception.DaoException;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface AdminMapper {
-    int deleteByPrimaryKey(Integer adminId);
 
-    int insert(Admin record);
+    List<Admin> selectById(@Param("id") int id) throws DaoException;
 
-    int insertSelective(Admin record);
+    //添加
+    int add( Admin admin);
 
-    Admin selectByPrimaryKey(Integer adminId);
 
-    int updateByPrimaryKeySelective(Admin record);
-
-    int updateByPrimaryKey(Admin record);
 }
