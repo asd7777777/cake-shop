@@ -32,30 +32,30 @@
     <th>订单状态</th>
     <th>操作</th>
    </tr>
-   <tr>
-    <td>
-     <input type="checkbox"/>
-     <a href="order_detail.html">2015041803225</a>
-    </td>
-    <td class="center">
-     <span class="block">DeatGhost</span>
-     <span class="block">2015-04-18 12:00</span>
-    </td>
-    <td width="450">
-     <span class="block">张三[18309275673]</span>
-     <address>陕西省西安市未央区255号</address>
-    </td>
-    <td class="center">
-     <span><i>￥</i><b>58.00</b></span>
-    </td>
-    <td class="center">
-     <span>未付款</span>
-    </td>
-    <td class="center">
-     <a href="order_detail.html" class="inline-block" title="查看订单"><img src="images/icon_view.gif"/></a>
-     <a class="inline-block" title="删除订单"><img src="images/icon_trash.gif"/></a>
-    </td>
-   </tr>
+<!--   <tr>-->
+<!--    <td>-->
+<!--     <input type="checkbox"/>-->
+<!--     <a href="order_detail.html">2015041803225</a>-->
+<!--    </td>-->
+<!--    <td class="center">-->
+<!--     <span class="block">DeatGhost</span>-->
+<!--     <span class="block">2015-04-18 12:00</span>-->
+<!--    </td>-->
+<!--    <td width="450">-->
+<!--     <span class="block">张三[18309275673]</span>-->
+<!--     <address>陕西省西安市未央区255号</address>-->
+<!--    </td>-->
+<!--    <td class="center">-->
+<!--     <span><i>￥</i><b>58.00</b></span>-->
+<!--    </td>-->
+<!--    <td class="center">-->
+<!--     <span>未付款</span>-->
+<!--    </td>-->
+<!--    <td class="center">-->
+<!--     <a href="order_detail.html" class="inline-block" title="查看订单"><img src="images/icon_view.gif"/></a>-->
+<!--     <a class="inline-block" title="删除订单"><img src="images/icon_trash.gif"/></a>-->
+<!--    </td>-->
+<!--   </tr>-->
   </table>
   <!-- BatchOperation -->
   <div style="overflow:hidden;">
@@ -75,5 +75,108 @@
 	  </div>
   </div>
  </div>
+<script>
+ $(function () {
+  $.ajax({
+   url: "http://localhost:8080/order/allList",
+   type: "GET",
+   success: function (result) {
+    if (result.status === 20000) {
+     alert("success");
+     showOrder(result.data);
+    }
+   },
+   error: function () {
+    alert("error");
+   }
+  });
+
+ })
+
+ function showOrder(orderList) {
+  let $table = $("table");
+  for (const order of orderList) {
+   //订单状态
+   let status;
+   if (order.status==2) {
+    status = "已发货"
+   } else if (order.status==3) {
+    status = "待评价"
+   } else {
+    status = "待付款"
+   }
+   let $tr = $("<tr>");
+   $tr.appendTo($table);
+
+   let $td1 = $("<td>");
+   $td1.appendTo($tr)
+     .append(
+             $("<input>").attr("type","checkbox")
+     )
+     .append(
+             $("<a>").attr("href","order_detail.html?orderNo=" + order.orderNo).text(order.orderNo)
+     )
+
+   let $td2 = $("<td>");
+   $td2.appendTo($tr)
+     .attr("class","center")
+     .append(
+             $("<span>").attr("class","block").text("DeatGhost")
+     )
+     .append(
+             $("<span>").attr("class","block").text(order.createTime)
+     )
+
+   let $td3 = $("<td>");
+   $td3.appendTo($tr)
+     .css("width",450)
+     .append(
+             $("<span>").attr("class","block").text(order.userName)
+     )
+     .append(
+             $("<address>").text(order.address)
+     )
+
+   let $td4 = $("<td>");
+   $td4.appendTo($tr)
+     .attr("class","center")
+     .append(
+             $("<span>")
+               .append(
+                       $("<i>").text("￥")
+               )
+               .append(
+                       $("<b>").text(order.total)
+               )
+     )
+
+   let $td5 = $("<td>");
+   $td5.appendTo($tr)
+     .attr("class","center")
+     .append(
+             $("<span>").text(status)
+     )
+
+   let $td6 = $("<td>");
+   $td6.appendTo($tr)
+     .attr("class","center")
+     .append(
+             $("<a>").attr("href","order_detail.html?orderNo=" + order.orderNo)
+               .attr("class","inline-block")
+               .attr("title","查看订单")
+               .append(
+                       $("<img>").attr("src","images/icon_view.gif")
+               )
+     )
+     .append(
+             $("<a>").attr("class","inline-block")
+               .attr("title","删除订单")
+               .append(
+                       $("<img>").attr("src","images/icon_trash.gif")
+               )
+     )
+  }
+ }
+</script>
 </body>
 </html>

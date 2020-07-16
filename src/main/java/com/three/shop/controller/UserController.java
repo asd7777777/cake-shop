@@ -33,7 +33,7 @@ public class UserController {
     public ResponseEntity<LoginDto> loginController(LoginDto loginDto, HttpSession session) throws ServiceException {
         LoginDto loginDto1 = loginService.selectByNameAndPhoneAndEmailService(loginDto);
         loginDto1.setPassword(null);
-        session.setAttribute("LoginDto", loginDto);
+        session.setAttribute("LoginDto", loginDto1);
         return ResponseEntity.success(loginDto1);
     }
 }
