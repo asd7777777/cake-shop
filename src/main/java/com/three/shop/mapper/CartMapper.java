@@ -1,17 +1,56 @@
 package com.three.shop.mapper;
 
 import com.three.shop.domain.entity.Cart;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
+/**
+ * Description：对应购物车的相关 crud 操作
+ *
+ * @author sheng
+ * @date 2020/7/14 10:00
+ * @since JDK 1.8
+ */
 public interface CartMapper {
-    int deleteByPrimaryKey(Integer cartId);
+    /**
+     * 根据传入的 userId 查询当前用户的购物车数据
+     *
+     * @param userId 用户 id
+     * @return 购物车集合
+     */
+    List<Cart> selectByUserId(@Param("userId") int userId);
 
-    int insert(Cart record);
+    /**
+     * 根据传入的 userId productId 查询当前用户的购物车数据
+     *
+     * @param userId    用户 id
+     * @param productId 商品 id
+     * @return 购物车集合
+     */
+    List<Cart> selectByUserIdAndProductId(@Param("userId") int userId, @Param("productId") int productId);
 
-    int insertSelective(Cart record);
+    /**
+     * 根据传入的 购物车 id查询购物车内容
+     *
+     * @param cartId 购物车 id
+     * @return cart 对象
+     */
+    Cart selectByCartId(@Param("cartId") int cartId);
 
-    Cart selectByPrimaryKey(Integer cartId);
+    /**
+     * 根据传入的 Cart 对象进行修改：数量、状态(假删除)
+     *
+     * @param cart Cart 对象
+     * @return 影响行数
+     */
+    int updateCart(@Param("cart") Cart cart);
 
-    int updateByPrimaryKeySelective(Cart record);
-
-    int updateByPrimaryKey(Cart record);
+    /**
+     * 根据传入的 Cart 对象进行插入
+     *
+     * @param cart Cart 对象
+     * @return 影响行数
+     */
+    int insertCart(@Param("cart") Cart cart);
 }
