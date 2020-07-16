@@ -14,6 +14,8 @@
         $(function () {
             $("#btn").click(function () {
                 let username = $(".name").val();
+                let email = $(".name").val();
+                let phone = $(".name").val();
                 let password = $(".pass").val();
                 if (username == null || username == "" ) {
                     alert("用户名不能为空")
@@ -22,7 +24,9 @@
                 }
                 let data = {
                     username: username,
-                    password: password
+                    password: password,
+                    email:email,
+                    phone:phone
                 };
 
                 $.ajax({
@@ -32,6 +36,7 @@
                     contentType:'application/json;utf-8',
                     success:function (result) {
                         if (result.status == 20000 && result.msg == "成功") {
+                            alert("123")
                             window.location.href = "https://www.baidu.com";
                         }
                     }
@@ -92,7 +97,7 @@
             <div id="div">
                 <form>
                     <div>
-                        <input type="text" class="name" name="username"  placeholder="用户名">
+                        <input type="text" class="name" name="username"  placeholder="用户名或者邮箱或者手机号">
                     </div>
                     <div>
                         <input type="password" class="pass" name="password"  placeholder="密码">
