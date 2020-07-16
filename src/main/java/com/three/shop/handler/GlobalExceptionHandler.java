@@ -1,3 +1,4 @@
+/*
 package com.three.shop.handler;
 
 import com.three.shop.exception.DaoException;
@@ -24,3 +25,4 @@ public class GlobalExceptionHandler {
         return ResponseEntity.error(Status.DAO_ERROR);
     }
 }
+*/

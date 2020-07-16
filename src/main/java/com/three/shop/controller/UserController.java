@@ -2,7 +2,6 @@ package com.three.shop.controller;
 
 import com.three.shop.domain.dto.LoginDto;
 import com.three.shop.domain.dto.RegisterDto;
-import com.three.shop.domain.entity.User;
 import com.three.shop.exception.ServiceException;
 import com.three.shop.service.RegisterService;
 import com.three.shop.service.LoginService;
