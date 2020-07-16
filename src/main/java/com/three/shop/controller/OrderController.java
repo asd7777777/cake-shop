@@ -1,5 +1,6 @@
 package com.three.shop.controller;
 
+import com.three.shop.domain.dto.LoginDto;
 import com.three.shop.domain.dto.OrderDto;
 import com.three.shop.domain.vo.OrderDetailVo;
 import com.three.shop.domain.vo.OrderVo;
@@ -9,6 +10,7 @@ import com.three.shop.utils.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController()
@@ -18,14 +20,16 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("/allList")
-    public ResponseEntity<List<OrderVo>> allList( @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "4") int size) {
-        List<OrderVo> orderVos = orderService.orderList(1, page, size);
+    public ResponseEntity<List<OrderVo>> allList(HttpSession session, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "4") int size) {
+        LoginDto loginDto = (LoginDto)session.getAttribute("LoginDto");
+        List<OrderVo> orderVos = orderService.orderList(loginDto.getUserId(), page, size);
         return ResponseEntity.success(orderVos);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<OrderVo>> list(int status, @RequestParam(defaultValue = "1") int page,@RequestParam(defaultValue = "4") int size){
-        List<OrderVo> orderVos = orderService.findListByStatus(status, 1, page, size);
+    public ResponseEntity<List<OrderVo>> list(HttpSession session, int status, @RequestParam(defaultValue = "1") int page,@RequestParam(defaultValue = "4") int size){
+        LoginDto loginDto = (LoginDto)session.getAttribute("LoginDto");
+        List<OrderVo> orderVos = orderService.findListByStatus(status, loginDto.getUserId(), page, size);
         return ResponseEntity.success(orderVos);
     }
 
