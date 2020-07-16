@@ -488,11 +488,12 @@
                                                                 // 数量
                                                                 .append(
                                                                     $("<input>")
+                                                                        .attr("id", "productQuantity_" + i)
                                                                         .addClass("sum")
                                                                         .attr("type", "text")
                                                                         .attr("value", carts[i].productQuantity)
-                                                                    // 失去焦点事件
-                                                                    // .attr("onBlur", "updateQuantity(" + carts[i].cartId + "," + carts[i].userId + ")")
+                                                                        // 失去焦点事件
+                                                                        .attr("onBlur", "updateQuantity(" + carts[i].cartId + "," + carts[i].userId + "," + carts[i].productQuantity + "," + i + ")")
                                                                 )
                                                                 // + 加数量
                                                                 .append(
@@ -585,53 +586,73 @@
     }
 
     // // 失去焦点事件时修改数量
-    // function updateQuantity(_cartId, _userId) {
-    //     $(function () {
-    //         // 判断数量是否正常
-    //         if (_num < 1) {
-    //             alert("数量最小为 1，操作失败");
-    //             // 终止方法
-    //             return false;
-    //         }
-    //         // url
-    //         let url = "http://localhost:8080/cakeshop/cart/updateCart";
-    //         // 参数
-    //         let data = {
-    //             "cartId": _cartId,
-    //             "quantity": _num
-    //         };
-    //         // 修改
-    //         if (confirm("确认修改数量吗？")) {
-    //             $.ajax({
-    //                 url: url,
-    //                 data: data,
-    //                 type: "POST",
-    //
-    //                 success: function (_data) {
-    //                     // 判断状态
-    //                     if (_data.status === 20000 && _data.message === "success") {
-    //                         // 取数据
-    //                         let data = _data.data;
-    //                         // 判断
-    //                         if (data != null) {
-    //                             if (data.status === 20000 && data.message === "success") {
-    //                                 alert("成功修改" + data.data + "条数据");
-    //                                 // 清空购物车信息
-    //                                 $("#cart_content").empty();
-    //                                 // 重新展示购物车信息
-    //                                 showCart(_userId);
-    //                             }
-    //                         } else {
-    //                             alert("修改失败");
-    //                         }
-    //                     } else {
-    //                         alert("修改失败");
-    //                     }
-    //                 }
-    //             })
-    //         }
-    //     })
-    // }
+    function updateQuantity(_cartId, _userId, _quantity, _index) {
+        $(function () {
+            // 拼接 id
+            let inputId = "productQuantity_" + _index;
+            // 获取数量
+            let _num = $("#" + inputId).val();
+            // 判断数量是否相同
+            if (_quantity == _num) {
+                // 相同则终止方法
+                return false;
+            }
+            // 判断数量是否正常
+            if (_num < 1) {
+                alert("数量最小为 1，操作失败");
+                // 清空购物车信息
+                $("#cart_content").empty();
+                // 重新展示购物车信息
+                showCart(_userId);
+                // 终止方法
+                return false;
+            }
+            // url
+            let url = "http://localhost:8080/cakeshop/cart/updateCart";
+            // 参数
+            let data = {
+                "cartId": _cartId,
+                "quantity": _num
+            };
+            // 修改
+            if (confirm("确认将数量修改为 " + _num + " 吗？")) {
+                $.ajax({
+                    url: url,
+                    data: data,
+                    type: "POST",
+
+                    success: function (_data) {
+                        // 判断状态
+                        if (_data.status === 20000 && _data.message === "success") {
+                            // 取数据
+                            let data = _data.data;
+                            // 判断
+                            if (data != null) {
+                                if (data.status === 20000 && data.message === "success") {
+                                    alert("成功修改" + data.data + "条数据");
+                                } else {
+                                    alert("库存不足");
+                                }
+                                // 清空购物车信息
+                                $("#cart_content").empty();
+                                // 重新展示购物车信息
+                                showCart(_userId);
+                            } else {
+                                alert("修改失败");
+                            }
+                        } else {
+                            alert("修改失败");
+                        }
+                    }
+                })
+            } else {
+                // 清空购物车信息
+                $("#cart_content").empty();
+                // 重新展示购物车信息
+                showCart(_userId);
+            }
+        })
+    }
 
     // 加数量方法
     function add(_cartId, _userId, _num) {
