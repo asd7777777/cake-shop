@@ -93,4 +93,22 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where admin_id = #{adminId,jdbcType=INTEGER}
   </update>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select *
+        from  admin
+        where admin_id = #{id}
+        and status = 1
+
+    </select>
+
+    <select id="add" resultType="int">
+        update `admin`
+        set admin_name = #{adminName,jdbcType=VARCHAR},
+        email = #{email,jdbcType=VARCHAR},
+        `status` = #{status,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP}
+        where admin_id = #{adminId,jdbcType=INTEGER}
+
+    </select>
 </mapper>
