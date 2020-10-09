@@ -19,7 +19,7 @@ import java.util.List;
     AdminService adminService;
 
     /**
-     * 查询管理员
+     * 查询管理员123
      *
      */
     @GetMapping("/list2")
